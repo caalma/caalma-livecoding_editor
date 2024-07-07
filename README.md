@@ -1,2 +1,1 @@
-# caalma-livecoding_editor
-Editor para Livecoding
+# Editor para Livecoding (de Caalma)
