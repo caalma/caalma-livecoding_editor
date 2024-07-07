@@ -50,11 +50,14 @@ def iniciar(entrada='1', etiqueta= 'ne', duracion='0'):
     ins = now.strftime("%Y-%m-%d_%H-%M-%S")
     nom = f'{etiqueta}/{ins}'
     arc = f'{rgAbs}{nom}.{fg}'
-    idx = len(listdir(f'{rgAbs}{etiqueta}'))
+
     cmd_gr = f'mkdir -p "{rgAbs}{etiqueta}"'
+    ejecutar(cmd_gr)
+
+    idx = len(listdir(f'{rgAbs}{etiqueta}'))
     param_duracion = f'-t {duracion}' if duracion > 0 else ''
     cmd = f'ffmpeg -v quiet -f pulse -i "{inp}" {param_duracion} {sg} -preset slower "{arc}"'
-    ejecutar(cmd_gr)
+
     pid = ejecutar_y_esperar(cmd)
 
     autocorte = param_duracion != ''
