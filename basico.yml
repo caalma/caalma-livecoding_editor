@@ -53,8 +53,8 @@ grabacion:
   titulo: Controles de grabado de audio
   activo: true
   visible: 1
-  ruta: './app/static/samples/grabaciones/'
-  json: './static/samples/grabaciones/samples.json'
+  ruta: '../samples/grabaciones/'
+  json: '../samples/grabaciones/samples.json'
   formato: 'wav'
   # mp3 , wav , m4a . flac
   sobreescribir: true
