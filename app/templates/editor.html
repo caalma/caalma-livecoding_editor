@@ -20,7 +20,7 @@
                font_family = '{{ cfg.codeStrudel.fontfamily }}';
 
          /* samples */
-         const url_local = 'http://{{ cfg.server_host }}:{{ cfg.server_port }}/',
+         const url_local = 'http://{{ cfg.server.host }}:{{ cfg.server.port }}/',
                samples_local = `${url_local}static/samples/`,
                lista_de_samples = [
              {% for dir in cfg.samples.activos %}
