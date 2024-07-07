@@ -1,0 +1,33 @@
+#codeNotas {
+    background: #1f1223;
+    display: none;
+}
+
+#codeNotas.activo {
+    display: block;
+}
+
+#codeNotas * {
+    font-family: 'Fira Code', monospace;
+}
+
+#codeNotas .cnt {
+    padding: 10px;
+    color: #78c2e7;
+}
+
+#codeNotas .cnt:focus {
+    border: none;
+    outline: 1px dashed #cc8;
+}
+
+#codeNotas .archivo {
+    margin: 0;
+    font-size: 0.8em;
+    color: rgba(255,255,255,.4);
+    text-align: right;
+}
+
+#codeNotas .archivo:focus {
+    color: rgba(255,255,255,.8);
+}

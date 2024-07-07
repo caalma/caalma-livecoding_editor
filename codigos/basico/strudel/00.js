@@ -1,0 +1,5 @@
+stack(
+    s("piano")
+)
+
+// silence

@@ -1,0 +1,209 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>{{ cfg.title }}</title>
+
+        <link rel="icon" href="/static/img/favicon.ico">
+
+        <link rel="stylesheet" href="/static/css/estilo.css">
+        <link rel="stylesheet" href="/static/css/menu.css">
+
+        {% if cfg.codeStrudel.activo %}
+        <script>
+         /* theme - visual */
+         const theme_key = '{{ cfg.codeStrudel.theme }}',
+               font_family = '{{ cfg.codeStrudel.fontfamily }}';
+
+         /* samples */
+         const url_local = 'http://{{ cfg.server_host }}:{{ cfg.server_port }}/',
+               samples_local = `${url_local}static/samples/`,
+               lista_de_samples = [
+             {% for dir in cfg.samples.activos %}
+             `${samples_local}{{ dir }}/samples.json`,
+             {% endfor %}
+         ];
+
+         /* strudel codigos*/
+         const path_code_strudel = '{{ cfg.codeStrudel.ruta }}';
+        </script>
+        {% endif %}
+
+        {% if cfg.codeStrudel.modo_offline %}
+        <script src="/static/js/strudel-1_1_0-offline.js"></script>
+        {% else %}
+        <script src="https://unpkg.com/@strudel/repl@latest"></script>
+        {% endif %}
+
+
+        <script src="/static/js/audiomuestra.js"></script>
+        <script src="/static/js/musicaconceptos.js"></script>
+        <script src="/static/js/comun.js"></script>
+        <script src="/static/js/utiles.js"></script>
+        <script src="/static/js/init.js"></script>
+    </head>
+    <body>
+        <div class="areas">
+            <div class="areaCode" id="areaCode">
+                <ul>
+
+                    {% if cfg.codeStrudel.activo %}
+                    <li>
+                        <link rel="stylesheet" href="/static/css/codestrudel.css">
+                        <script src="/static/js/codeStrudel.js"></script>
+                        <div id="containerStrudel">
+                            <p class="archivo" contentEditable="true" spellcheck="false" autocorrect="off" autocapitalize="off" translate="no"></p>
+                            <div id="codeStrudel" title="{{ cfg.codeStrudel.titulo }}"></div>
+                        </div>
+                        <script>
+                         var codeStrudel_visible = {{ cfg.codeStrudel.visible }};
+                         CodeStrudel.activar();
+                         G._codeStrudel_archivo_inicial = '{{ cfg.codeStrudel.archivo }}';
+                        </script>
+                    </li>
+                    {% endif %}
+
+                    {% if cfg.codeNotas.activo %}
+                    <li>
+                        <link rel="stylesheet" href="/static/css/notas.css">
+                        <script src="/static/js/notas.js"></script>
+                        <div id="codeNotas" title="{{ cfg.codeNotas.titulo }}"></div>
+                        <script>
+                         Notas.activar();
+                         Notas.ruta = '{{ cfg.codeNotas.ruta }}';
+                         Notas.leer('{{ cfg.codeNotas.archivo }}');
+                         Notas.visible({{ cfg.codeNotas.visible }});
+                        </script>
+                    </li>
+                    {% endif %}
+
+                    {% if cfg.codeJs.activo %}
+                    <li>
+                        <link rel="stylesheet" href="/static/css/codejs.css">
+                        <script src="/static/js/codejs.js"></script>
+                        <div id="codeJs" title="{{ cfg.codeJs.titulo }}"></div>
+                        <script>
+                         CodeJs.activar();
+                         CodeJs.ruta = '{{ cfg.codeJs.ruta }}';
+                         CodeJs.leer('{{ cfg.codeJs.archivo }}');
+                         CodeJs.visible({{ cfg.codeJs.visible }});
+                        </script>
+                    </li>
+                    {% endif %}
+
+                </ul>
+            </div
+            >
+            <div class="areaUtiles visible" id="areaUtiles">
+                <button class="ajuste">#</button>
+                <script>
+                 window.areaUtiles.querySelector('.ajuste').addEventListener('click', ()=>{
+                     window.areaUtiles.classList.toggle('visible');
+                     window.areaCode.classList.toggle('completo');
+                 });
+                </script>
+                <ul>
+
+                    <li>
+                        <div id="menuLCE" class="menu">
+                            <div>
+                                <span>LCEditor: </span>
+                                <span title="Dimensiones de ventana">{<span id="dimensiones"></span>}</span>
+                                <span>---</span>
+                                <button id="btnShutdown" title="Cerrar la aplicación">Chau!</button>
+                            </div>
+                            <div>
+                                <input id="codeComando" title="Área de ejecución de comandos" autocorrect="off" autocapitalize="off" spellcheck="false"
+                                       value="{{ cfg.LCEditor.codeComando.inicial }}" list="codeComando_historial">
+                                <datalist id="codeComando_historial">
+                                    {% for code in cfg.LCEditor.codeComando.historial %}
+                                    <option value="{{ code }}"></option>
+                                    {% endfor%}
+                                </datalist>
+
+                            </div>
+                            <script>
+                             {% if cfg.LCEditor.menu_visible %}
+                             menuLCE.classList.add('activo');
+                             {% endif %}
+                            </script>
+
+                        </div>
+                    </li>
+
+                    <li>
+                        <div id="menuStrudel" class="menu">
+                            <div>
+                                <span>STRUDEL: </span>
+                                <button id="btnEval" title="Evaluar e Iniciar">=</button>
+                                <button id="btnStart" title="Reproducir/Continuar">></button>
+                                <button id="btnPause" title="Pausar y Esperar">-</button>
+                                <button id="btnStop" title="Detener y Reiniciar">·</button>
+                                <span>---</span>
+                                <button id="btnLineNumberToggle" title="Conmutar Visibilidad de Números de Línea">LN</button>
+                                <button id="btnWrapTextToggle" title="Conmutar Corte de línea de texto.">CT</button>
+                                <button id="btnAutoCommpleteToggle" title="Conmutar Ayuda y Autocompletado">AC</button>
+                            </div>
+                        </div>
+                        <script>
+                         {% if cfg.codeStrudel.menu_visible %}
+                         menuStrudel.classList.add('activo');
+                         {% endif %}
+                        </script>
+                    </li>
+
+                    {% if cfg.grabacion.activo %}
+                    <li>
+                        <link rel="stylesheet" href="/static/css/grabacion.css">
+                        <script src="/static/js/grabacion.js"></script>
+                        <div id="grabacion" title="{{ cfg.grabacion.titulo }}"></div>
+                        <script>
+                         Grabacion.activar();
+                         Grabacion.visible({{ cfg.grabacion.visible }});
+                        </script>
+                    </li>
+                    {% endif %}
+
+                    {% if cfg.cronometro.activo %}
+                    <li>
+                        <link rel="stylesheet" href="/static/css/cronometro.css">
+                        <script src="/static/js/cronometro.js"></script>
+                        <div id="cronometro" title="{{ cfg.cronometro.titulo }}"></div>
+                        <script>
+                         Cronometro.activar();
+                         Cronometro.visible({{ cfg.cronometro.visible }});
+                        </script>
+                    </li>
+                    {% endif %}
+
+                    {% if cfg.controlAudio.activo %}
+                    <li>
+                        <link rel="stylesheet" href="/static/css/controlesaudio.css">
+                        <script src="/static/js/controlesaudio.js"></script>
+                        <div id="controlesAudio" title="{{ cfg.controlAudio.titulo }}"></div>
+                        <script>
+                         ControlesAudio.activar();
+                        </script>
+                    </li>
+                    {% endif %}
+
+                    {% if cfg.webExterna.activo %}
+                    <li>
+                        <link rel="stylesheet" href="/static/css/webexterna.css">
+                        <div id="webExterna" title="{{ cfg.webExterna.titulo }}">
+                            <input type="text" value="{{ cfg.webExterna.url }}">
+                            <iframe style="height:{{ cfg.webExterna.height }}" src="{{ cfg.webExterna.url }}"></iframe>
+                        </div>
+                        <script>
+                         window.webExterna.querySelector("input").addEventListener("change", ev => {
+                             window.webExterna.querySelector("iframe").src = ev.currentTarget.value;
+                         })
+                        </script>
+                    </li>
+                    {% endif %}
+
+                </ul>
+            </div>
+        </div>
+    </body>
+</html>

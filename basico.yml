@@ -1,0 +1,94 @@
+---
+
+title: 'Caalma - LC Editor'
+
+carpeta:
+  codigos: './codigos/basico/'
+  samples: './samples/'
+  synth: './synth/'
+
+browser: 'chromium --app='
+
+server_host: '127.0.0.1'
+server_port: 8008
+live_port: 35729
+server_debug: false
+
+codeStrudel:
+  titulo: Área para código Strudel
+  theme: 'materialDark'
+  fontfamily: 'Fira Code'
+  activo: true
+  modo_offline: false
+  visible: 1
+  ruta: 'strudel/'
+  archivo: 00.js
+  menu_visible: 1
+
+codeJs:
+  titulo: Área para código Javascript
+  activo: true
+  visible: 1
+  ruta: 'extra/'
+  archivo: 00.js
+
+codeNotas:
+  titulo: Área para notas
+  activo: true
+  visible: 1
+  ruta: 'notas/'
+  archivo: 00.txt
+
+LCEditor:
+  menu_visible: 1
+  codeComando:
+    inicial: 'U.fijar()'
+    historial:
+      - 'U.recargar()'
+      - 'U.ayuda()'
+      - 'NT.limpiar()'
+      - 'U.sls()'
+
+grabacion:
+  titulo: Controles de grabado de audio
+  activo: true
+  visible: 1
+  ruta: './app/static/samples/grabaciones/'
+  json: './static/samples/grabaciones/samples.json'
+  formato: 'wav'
+  # mp3 , wav , m4a . flac
+  sobreescribir: true
+
+cronometro:
+  titulo: Cronometro
+  activo: true
+  visible: 1
+
+controlAudio:
+  titulo: Control de audio
+  activo: true
+
+webExterna:
+  titulo: Visor de recurso web externo
+  activo: false
+  url: ''
+  height: '300px'
+
+samples:
+  activos:
+    - caalma-bateria_baja
+    - caalma-onomatopeyas
+    - caalma-ptav
+    - cybernetic
+    - dough
+    - dough-amiga
+    - dough-fox
+    - dough-waveforms
+    - emptyflash
+    - estuary
+    - felixroos-piano
+    - fischer_tr808
+    - grabaciones
+    - ritchse_tidal-drum-machines
+    - tidalcycles_dirt
+    - yaxu-spicule

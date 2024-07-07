@@ -1,0 +1,76 @@
+#cronometro {
+    padding: 10px;
+    display: none;
+}
+
+#cronometro.fijo {
+    position: fixed;
+    bottom: 0px;
+    right: 0px;
+    width: 200px;
+}
+
+#cronometro.activo {
+    display: block;
+}
+
+#cronometro * {
+    font-family: 'Fira Code', monospace;
+}
+#cronometro .visor {
+    text-align: center;
+    padding: 10px;
+    background: #8f0;
+    color: #000;
+    font-size: 1.1em;
+    border-radius: 40px;
+}
+
+#cronometro .controles {
+    margin: 10px;
+    text-align: center;
+}
+
+#cronometro .controles button {
+    padding: 3px;
+    background: #333;
+    color: #ccc;
+    border: 0;
+    border-radius: 4px;
+    font-weight: 900;
+    cursor: pointer;
+    margin: 4px 0;
+}
+#cronometro .controles button:hover {
+    background: #222;
+    color: #fff;
+}
+
+#cronometro .controles button.iniciar:before { content: 'INI'; }
+#cronometro .controles button.pausar:before { content: 'PAU'; }
+#cronometro .controles button.detener:before { content: 'DET'; }
+#cronometro .controles button.limpiar:before { content: 'LIM'; }
+#cronometro .controles button.registrar:before { content: 'REG'; }
+#cronometro .controles button.copiar:before { content: 'COP'; }
+
+#cronometro .controles input {
+    width: 70px;
+    border: 1px solid #aaa;
+    background: #eee;
+    padding: 4px;
+    border-radius: 4px;
+}
+
+#cronometro .registro {
+    font-size: 0.8em;
+    margin: 0;
+    padding: 0;
+}
+
+
+#cronometro .registro li {
+    list-style: none;
+    border-bottom: 1px solid #ccc;
+    margin: 6px 0;
+    color: #fff;
+}

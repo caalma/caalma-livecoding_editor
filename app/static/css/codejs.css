@@ -1,0 +1,48 @@
+#codeJs {
+    background: #022310;
+    display: none;
+}
+
+#codeJs.activo {
+    display: block;
+}
+
+#codeJs.flash.bien {
+    background: #282;
+}
+
+#codeJs.flash.error {
+    background: #822;
+}
+
+#codeJs * {
+    font-family: 'Fira Code', monospace;
+}
+
+#codeJs .cnt {
+    border: none;
+    background: transparent;
+    width: 100%;
+    min-width: 100%;
+    max-width: 100%;
+    display: block;
+    padding: 10px;
+    color: #97bf3c;
+    font-size: 1em;
+    overflow-y: hidden;
+}
+
+#codeJs .cnt:focus {
+    outline: 1px dashed #cc8;
+}
+
+#codeJs .archivo {
+    margin: 0;
+    font-size: 0.8em;
+    color: rgba(255,255,255,.4);
+    text-align: right;
+}
+
+#codeJs .archivo:focus {
+    color: rgba(255,255,255,.8);
+}

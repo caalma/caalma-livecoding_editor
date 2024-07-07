@@ -1,0 +1,90 @@
+#grabacion {
+    display: none;
+    padding: 10px;
+}
+#grabacion.fijo {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 300px;
+}
+#grabacion * {
+    font-family: 'Fira Code', monospace;
+}
+
+#grabacion.activo {
+    display: block;
+}
+
+#grabacion select {
+    width: 100%;
+    display: inline-block;
+}
+
+#grabacion input {
+    width: 100%;
+    display: inline-block;
+}
+
+#grabacion nav {
+    padding: 10px 0;
+}
+
+#grabacion nav button {
+    border: none;
+    padding: 6px;
+    border-radius: 6px;
+    background: #333;
+    color: #fff;
+    cursor: pointer;
+}
+#grabacion nav button:hover {
+    background: #666;
+}
+
+#grabacion nav button.iniciar {
+    background: #060;
+}
+#grabacion nav button:hover.iniciar {
+    background: #0a0;
+}
+
+
+#grabacion .lista {
+    margin: 0;
+    padding: 3px 6px;
+}
+
+#grabacion .lista {
+    margin: 0;
+    padding: 3px 6px;
+}
+
+#grabacion .lista li {
+    border-bottom: 1px dashed rgba(2555,255,255, 0.3);
+    margin: 3px 0;
+}
+
+#grabacion .lista li span {
+    color: #fff;
+    font-size: 0.7em;
+}
+
+#grabacion .lista li b {
+    color: #ffa;
+    font-size: 0.8em;
+    padding: 0;
+}
+
+#grabacion .lista button.fin {
+    margin: 3px 6px;
+    padding: 3px 6px;
+    background: #800;
+    color: #fff;
+    border: none;
+    border-radius: 9px;
+    cursor: pointer;
+}
+#grabacion .lista button.fin:hover {
+    background: #a00;
+}

@@ -1,0 +1,25 @@
+---------------------- AYUDA ------------------------------- !
+
+ctrl+/ -> conmuta el comentado de bloque de codigo (en cod-strudel)
+ctrl+enter -> evalua todo el codigo (en cod-strudel y cod-js)
+shift+enter -> evalua el bloque actual. si no hay selección evalua la línea actual, sinó el texto seleccionado (en cod-js)
+
+esc -> foco en linea de comandos
+ctrl+esc -> conmuna visibilidad de menu general
+
+f1 -> foco en codigo strudel 
+ctrl+f1 -> conmuta visibilidad de codigo strudel
+
+f2 -> foco en codigo javascript
+
+ctrl+f2 -> conmuta visibilidad de codigo javascript
+
+f3 -> foco en notas
+ctrl+f3 -> conmuta visibilidad de notas
+
+f4 -> conmuta cronometro
+f5 -> recarga la página
+
+f6 -> conmuta panel de grabación
+
+ctrl+r -> recarga la pagina
