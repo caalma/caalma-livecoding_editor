@@ -19,7 +19,7 @@ def ejecutar_y_esperar(cmd):
     return p.pid
 
 def registrar_grabacion():
-    dat = { '_base': rg.replace('/app/', '/') }
+    dat = { '_base': rg.replace('../', '/static/') }
     idx = None
 
     for gr in sorted(listdir(rgAbs)):
