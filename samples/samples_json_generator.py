@@ -2,11 +2,11 @@
 # -*- coding:utf-8 -*-
 
 import os
-from os.path import splitext
+from os.path import splitext, basename, dirname
 import json
 
-nombre = 'emptyflash'
-extensiones_validas = ['wav', 'ogg', 'mp3']
+nombre = basename(dirname(__file__))
+extensiones_validas = ['wav', 'ogg', 'mp3', 'm4a']
 
 def generate_json():
     data = {

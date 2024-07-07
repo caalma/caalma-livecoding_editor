@@ -3,7 +3,7 @@
 
 from subprocess import Popen, PIPE
 from os import listdir
-from os.path import realpath
+from os.path import realpath, isdir
 from sys import argv
 from datetime import datetime
 import json
@@ -23,8 +23,8 @@ def registrar_grabacion():
     idx = None
 
     for gr in sorted(listdir(rgAbs)):
-        if not gr == 'samples.json':
-            ruta_grupo = f'{rgAbs}{gr}/'
+        ruta_grupo = f'{rgAbs}{gr}/'
+        if isdir(ruta_grupo):
             for ar in sorted(listdir(ruta_grupo)):
                 if not gr in dat:
                     dat[gr] = []

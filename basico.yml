@@ -9,21 +9,23 @@ carpeta:
 
 browser: 'chromium --app='
 
-server_host: '127.0.0.1'
-server_port: 8008
-live_port: 35729
-server_debug: false
+server:
+  host: '127.0.0.1'
+  port: 8008
+  live_port: 35729
+  debug: false
+
+modo_offline: false
 
 codeStrudel:
   titulo: Área para código Strudel
-  theme: 'materialDark'
-  fontfamily: 'Fira Code'
   activo: true
-  modo_offline: false
   visible: 1
   ruta: 'strudel/'
   archivo: 00.js
   menu_visible: 1
+  theme: 'materialDark'
+  fontfamily: 'Fira Code'
 
 codeJs:
   titulo: Área para código Javascript
@@ -56,7 +58,7 @@ grabacion:
   ruta: '../samples/grabaciones/'
   json: '../samples/grabaciones/samples.json'
   formato: 'wav'
-  # mp3 , wav , m4a . flac
+  # mp3 , wav , m4a , flac
   sobreescribir: true
 
 cronometro:
@@ -76,19 +78,5 @@ webExterna:
 
 samples:
   activos:
-    - caalma-bateria_baja
-    - caalma-onomatopeyas
-    - caalma-ptav
-    - cybernetic
-    - dough
-    - dough-amiga
-    - dough-fox
-    - dough-waveforms
-    - emptyflash
-    - estuary
-    - felixroos-piano
-    - fischer_tr808
+    - caalma-sample_ejemplo
     - grabaciones
-    - ritchse_tidal-drum-machines
-    - tidalcycles_dirt
-    - yaxu-spicule

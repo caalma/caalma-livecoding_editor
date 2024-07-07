@@ -6,6 +6,10 @@
 
         <link rel="icon" href="/static/img/favicon.ico">
 
+        {% if not cfg.modo_offline %}
+        <link rel="stylesheet" href="/static/css/tipografia.css">
+        {% endif%}
+
         <link rel="stylesheet" href="/static/css/estilo.css">
         <link rel="stylesheet" href="/static/css/menu.css">
 
@@ -29,7 +33,7 @@
         </script>
         {% endif %}
 
-        {% if cfg.codeStrudel.modo_offline %}
+        {% if cfg.modo_offline %}
         <script src="/static/js/strudel-1_1_0-offline.js"></script>
         {% else %}
         <script src="https://unpkg.com/@strudel/repl@latest"></script>
@@ -106,11 +110,11 @@
 
                     <li>
                         <div id="menuLCE" class="menu">
-                            <div>
-                                <span>LCEditor: </span>
+                            <div class="alignLeft">
+                                <span>LCE: </span>
                                 <span title="Dimensiones de ventana">{<span id="dimensiones"></span>}</span>
-                                <span>---</span>
-                                <button id="btnShutdown" title="Cerrar la aplicación">Chau!</button>
+                                <span title="Modo Offline">{% if cfg.modo_offline %}{offline}{% else %}{online}{% endif %}</span>
+                                <button id="btnShutdown" title="Cerrar la aplicación y apagar el servidor.">Chau!</button>
                             </div>
                             <div>
                                 <input id="codeComando" title="Área de ejecución de comandos" autocorrect="off" autocapitalize="off" spellcheck="false"

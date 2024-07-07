@@ -17,7 +17,9 @@ body {
 }
 
 .oculto { display: none!important; }
-
+.alignLeft {
+    text-align: left;
+}
 .areas {
     margin: 0;
     padding: 0;

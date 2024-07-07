@@ -23,7 +23,7 @@ def so_audio_volumen():
     p = Popen(cmd, shell=True, stdout=PIPE)
     return p.stdout.read().decode().strip()
 
-def iniciar_app(ar='./seteos.yml'):
+def iniciar_app(ar='./basico.yml'):
     global cfg, ru_codigos, ru_samples, ru_synth, ar_cfg_actual
     if ar_cfg_actual == None:
         ar_cfg_actual = '../' + ar

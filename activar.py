@@ -24,9 +24,9 @@ if __name__ == '__main__':
     r = './app/'
     chdir(r)
 
-    h = cfg['server_host']
-    p = cfg['server_port']
-    l = cfg['live_port']
+    h = cfg['server']['host']
+    p = cfg['server']['port']
+    l = cfg['server']['live_port']
     url = f'http://{h}:{p}'
 
     pb = Popen(f'{cfg["browser"]}"{url}"',
@@ -42,4 +42,4 @@ if __name__ == '__main__':
 
     server.watch('static/*', ignore=True)
 
-    server.serve(root='./', liveport=l, host=h, port=p, debug=cfg['server_debug'])
+    server.serve(root='./', liveport=l, host=h, port=p, debug=cfg['server']['debug'])

@@ -10,18 +10,30 @@
 
 + Python 3
 + Livereload
++ PulseAudio (para la utilidad de grabación)
++ GNU/Linux (para la utilidad de grabación)
++ Tipografía "Fira Code" (para el modo-offline). Puede obtenerse desde: https://fonts.google.com/selection?query=fira+code
 
 ## Características:
 
-+ Personalizable, con la edición de `seteos.yml`.
-+ Menú superior:
-  + Conmutar visibilidad con `Key Escape`.
-  + Área de comando. Para ejecutar código javascript.
-  + Botones de ejecución del Strudel-REPL.
-  + Botones para conmutar características del Strudel-REPL.
-  + Dimensiones de ventana.
-  + Botón para apagar el server y cerrar la ventana de la web-app.
-+ Comando javascript específicos:
-  + `leer("nombre_del_archivo")`: Lee el código con dicho nombre y extensión `.js` ubicado en la carpeta `./codigos/`, y lo introduce en el REPL.
-  + `grabar("nombre_del_archivo")`: Graba el código actual del REPL en un archivo con dicho nombre y extensión `.js` en la carpeta `./codigos/`.
-  + `chau()`: Detiene el server y cierra la web app.
++ Interfaz personalizable.
++ Dispone de dos área claras: una para bloques de código y la otra para utilidades variadas.
++ El área de código está integrada por:
+  + Un bloque de código Strudel.
+  + Un bloque para notas.
+  + Un bloque de código Javascript.
++ Cada bloque de código graba y lee desde archivos específicos almacenados dentro de la carpeta `./codigos/`.
++ El área de útiles incluye:
+  + Menú general
+  + Menú strudel
+  + Panel para grabaciones (que se incorporan como samples).
+  + Cronómetro
+  + Controles de audio del sistema operativo.
++ Para Strudel está disponible una versión offline. Dicha versión está modificada para que cargue los samples y los synth desde local. La versión offline es Strudel 1.1.0.
+
+
+## Pendiente
+
++ [ ] Incluir Hydra.
++ [ ] Detallar utilidades en la Ayuda.
++ [ ] Hacer adaptación para configuraciones de sistemas operativos diferentes de GNU/Linux.
