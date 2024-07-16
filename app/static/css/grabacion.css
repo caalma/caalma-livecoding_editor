@@ -88,3 +88,7 @@
 #grabacion .lista button.fin:hover {
     background: #a00;
 }
+
+#grabacion .d-flex {
+    display: flex;
+}

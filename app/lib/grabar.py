@@ -43,13 +43,14 @@ def procesar_entradas(r):
 
 
 
-def iniciar(entrada='1', etiqueta= 'ne', duracion='0'):
+def iniciar(entrada='1', etiqueta= 'ne', duracion='0', formato='wav'):
     duracion = float(duracion)
     inp = entradas[entrada]
     now = datetime.now()
     ins = now.strftime("%Y-%m-%d_%H-%M-%S")
     nom = f'{etiqueta}/{ins}'
-    arc = f'{rgAbs}{nom}.{fg}'
+    frm = fg if not formato in formatos_permitidos else formato
+    arc = f'{rgAbs}{nom}.{frm}'
 
     cmd_gr = f'mkdir -p "{rgAbs}{etiqueta}"'
     ejecutar(cmd_gr)
@@ -110,12 +111,11 @@ def activar(cfg):
     sg = '-y' if cfg['grabacion']['sobreescribir'] else ''
     entradas = procesar_entradas(ejecutar('pactl list short sources', True))
 
-
-
 sep_et = '___'
 rg = ''
 rgAbs = ''
 arjsong = ''
+formatos_permitidos = ['mp3', 'wav', 'm4a', 'flac', 'ogg']
 fg = ''
 sg = ''
 entradas = ''

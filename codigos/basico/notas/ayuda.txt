@@ -1,5 +1,7 @@
 ---------------------- AYUDA ------------------------------- !
 
+|-----> TECLAS <-----|
+
 ctrl+/ -> conmuta el comentado de bloque de codigo (en cod-strudel)
 ctrl+enter -> evalua todo el codigo (en cod-strudel y cod-js)
 shift+enter -> evalua el bloque actual. si no hay selección evalua la línea actual, sinó el texto seleccionado (en cod-js)
@@ -23,3 +25,96 @@ f5 -> recarga la página
 f6 -> conmuta panel de grabación
 
 ctrl+r -> recarga la pagina
+
+
+
+|-----> FUNCIONES <-----|
+
+>=====> Codigos, CC
+CC.grabar(nom, ext='', texto='') // --- graba el contenido de un campo de código en el archivo indicado
+CC.leer(nom, ext='', cb=()=>{}) // --- lee el codigo según el nombre de archivo indicado
+CC.lista(ruta= '', cb_ok = ()=>{}) // --- lista los archivos de codigos disponibles
+
+>=====> Publico, PU
+PU.lista(ruta='', cb_ok = ()=>{}) // Lista los archivos disponibles en la carpeta /static/
+
+>=====> Consultas web
+ajax_post(url, data, cb_ok=(or)=>{}, cb_err=(or)=>{})
+ajax_get(url, data, cb_ok=(or)=>{}, cb_err=(or)=>{})
+
+>=====> Utiles. U
+U.recargar()// recargar la página
+U.ayuda(m='l', a='ayuda.txt') // mostrar ayuda
+U.sls(sep = ' | ') // listar samples
+U.gls(id, sep = ' | ') // listar bancos de audio del grupo
+U.sda(id) // datos del sample actual
+U.sau(n=0, id=undefined) // devuelve el audio específico
+U.gau(n=0, id=undefined) // graficar un audio específico
+U.sDuplicados(cb=v=>{}, out_json=true) // devuelve los samples colicion de nombres
+U.sExiste(nombre, cb=v=>{}, out_json=true) // buscar nombre de samples
+U.sBuscar(bus, cb=v=>{}, out_json=true) // buscar nombre de samples
+U.fijar() // Graba el estado actual de los códigos abiertos.
+
+>=====> CodeStrudel, CS
+CS.leer(path)
+CS.grabar(path)
+
+>=====> Strudel
+repl_code(c)
+repl_start()
+repl_pause()
+repl_stop()
+repl_lineNumber(e)
+repl_textWrap(e)
+repl_autoCompletion(e)
+list_themes(cb)
+set_theme(k)
+list_functions(cb)
+
+>=====> CodeJs, CJ
+CJ.insertar(t)
+CJ.reemplazar(t)
+CJ.limpiar()
+CJ.transformar(cb)
+CJ.leer(path)
+CJ.grabar(path)
+
+>=====> Notas, NT
+NT.insertar(t, al_inicio=false)
+NT.reemplazar(t)
+NT.limpiar()
+NT.transformar(cb)
+NT.leer(path)
+NT.grabar(path)
+
+>=====> AudioMuestra, AM
+AM.ls(cb=()=>{})
+AM.dat(ca, cb=()=>{})
+AM.ids(ca, cb=()=>{})
+AM.elem(k, ca, cb=()=>{})
+AM.bus(b, ca, cb=()=>{})
+
+>=====> Clase: AudioElem
+.url(n)
+.aud(n)
+.dat(completo=false)
+
+>=====> ControlesAudio, CA
+CA.iniciar_volumen()
+CA.setear_volumen(v, ajustar_deslizador=true)
+
+>=====> Graficar, GF
+GF.generar(ar)
+GF.posini(val, actualizar_deslizador=true)
+GF.posfin(val, actualizar_deslizador=true)
+
+>=====> MusicaConceptos, MC
+!! EN ESTADO INICIAL. TIENE ERRORES !!
+MC.escala(ton='C', estK='mayor', formatear=true)
+MC.familia(ton='C', estK='mayor')
+
+>=====> Caalma - LCE
+informar_dimensiones()
+
+shutdown_app()
+chau()

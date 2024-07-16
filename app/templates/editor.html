@@ -156,6 +156,17 @@
                         </script>
                     </li>
 
+                    {% if cfg.controlAudio.activo %}
+                    <li>
+                        <link rel="stylesheet" href="/static/css/controlesaudio.css">
+                        <script src="/static/js/controlesaudio.js"></script>
+                        <div id="controlesAudio" title="{{ cfg.controlAudio.titulo }}"></div>
+                        <script>
+                         ControlesAudio.activar();
+                        </script>
+                    </li>
+                    {% endif %}
+
                     {% if cfg.grabacion.activo %}
                     <li>
                         <link rel="stylesheet" href="/static/css/grabacion.css">
@@ -168,6 +179,18 @@
                     </li>
                     {% endif %}
 
+                    {% if cfg.graficar.activo %}
+                    <li>
+                        <link rel="stylesheet" href="/static/css/graficar.css">
+                        <script src="/static/js/graficar.js"></script>
+                        <div id="graficarAudio" title="{{ cfg.graficar.titulo }}"></div>
+                        <script>
+                         Graficar.activar();
+                         Graficar.visible({{ cfg.graficar.visible }});
+                        </script>
+                    </li>
+                    {% endif %}
+
                     {% if cfg.cronometro.activo %}
                     <li>
                         <link rel="stylesheet" href="/static/css/cronometro.css">
@@ -176,17 +199,6 @@
                         <script>
                          Cronometro.activar();
                          Cronometro.visible({{ cfg.cronometro.visible }});
-                        </script>
-                    </li>
-                    {% endif %}
-
-                    {% if cfg.controlAudio.activo %}
-                    <li>
-                        <link rel="stylesheet" href="/static/css/controlesaudio.css">
-                        <script src="/static/js/controlesaudio.js"></script>
-                        <div id="controlesAudio" title="{{ cfg.controlAudio.titulo }}"></div>
-                        <script>
-                         ControlesAudio.activar();
                         </script>
                     </li>
                     {% endif %}
@@ -205,6 +217,7 @@
                         </script>
                     </li>
                     {% endif %}
+
 
                 </ul>
             </div>

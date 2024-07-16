@@ -9,7 +9,9 @@
 ## Requiere
 
 + Python 3
-+ Livereload
++ Python: Flask, Livereload, pyyaml
++ Python: Numpy, Matplotlib (para graficación de audios)
++ Ffmpeg (para conversión de audios en graficación)
 + PulseAudio (para la utilidad de grabación)
 + GNU/Linux (para la utilidad de grabación)
 + Tipografía "Fira Code" (para el modo-offline). Puede obtenerse desde: https://fonts.google.com/selection?query=fira+code
@@ -25,15 +27,15 @@
 + Cada bloque de código graba y lee desde archivos específicos almacenados dentro de la carpeta `./codigos/`.
 + El área de útiles incluye:
   + Menú general
-  + Menú strudel
-  + Panel para grabaciones (que se incorporan como samples).
+  + Menú Strudel
+  + Controles de audio del sistema operativo
+  + Panel para grabaciones (que se incorporan como samples)
   + Cronómetro
-  + Controles de audio del sistema operativo.
+  + Graficación de audios
+  + Panel para carga de web externa
 + Para Strudel está disponible una versión offline. Dicha versión está modificada para que cargue los samples y los synth desde local. La versión offline es Strudel 1.1.0.
 
 
 ## Pendiente
-
-+ [ ] Incluir Hydra.
-+ [ ] Detallar utilidades en la Ayuda.
-+ [ ] Hacer adaptación para configuraciones de sistemas operativos diferentes de GNU/Linux.
++ Incluir Hydra.
++ Hacer adaptación para configuraciones de sistemas operativos diferentes de GNU/Linux.

@@ -7,16 +7,13 @@ from os.path import splitext
 from flask import ( Flask, render_template, request,
                    url_for, redirect, jsonify, send_file)
 from subprocess import Popen, PIPE
-from .lib import grabar
+from .lib import grabar, graficar
 
 
 # configuración
 
 cfg = {}
-ru_codigos = None
-ru_samples = None
-ru_synth = None
-ar_cfg_actual = None
+ru_codigos = ru_samples = ru_synth = ru_audmini = ar_cfg_actual = None
 
 def so_audio_volumen():
     cmd = "amixer -D pulse sget 'Master' | tail -n 1 | grep 'Right:' | awk -F'[][]' '{ print $2 }' | sed 's/%//'"
@@ -24,7 +21,7 @@ def so_audio_volumen():
     return p.stdout.read().decode().strip()
 
 def iniciar_app(ar='./basico.yml'):
-    global cfg, ru_codigos, ru_samples, ru_synth, ar_cfg_actual
+    global cfg, ru_codigos, ru_samples, ru_synth, ru_audmini, ar_cfg_actual
     if ar_cfg_actual == None:
         ar_cfg_actual = '../' + ar
 
@@ -33,6 +30,7 @@ def iniciar_app(ar='./basico.yml'):
         ru_codigos = '../' + cfg['carpeta']['codigos']
         ru_samples = '../' + cfg['carpeta']['samples']
         ru_synth = '../' + cfg['carpeta']['synth']
+        ru_audmini = '../' + cfg['carpeta']['audmini']
     grabar.activar(cfg)
 
 # aplicación flash
@@ -103,7 +101,8 @@ def grabar_audio_ini():
         entrada = request.form['entrada']
         etiqueta = request.form['etiqueta']
         duracion = request.form['duracion']
-        resp = grabar.iniciar(entrada, etiqueta, duracion)
+        formato = request.form['formato']
+        resp = grabar.iniciar(entrada, etiqueta, duracion, formato)
         return jsonify(resp)
     else:
         return jsonify({'error': True})
@@ -162,3 +161,33 @@ def static_synth(archivo=''):
         return send_file(r_doc)
     else:
         return ''
+
+@app.route('/static/audmini/<path:archivo>', methods=('GET', 'POST'))
+def static_audmini(archivo=''):
+    r_doc = f'{ru_audmini}{archivo}'
+    if r_doc:
+        return send_file(r_doc)
+    else:
+        return ''
+
+# listado de samples
+@app.route('/samples/ls/', methods=('GET', 'POST'))
+def samples_listar():
+    lista = []
+    if request.method == 'POST':
+        subruta = request.form['ruta']
+        for ar in listdir(f'{ru_samples}{subruta}'):
+            lista.append(ar)
+        return jsonify(lista)
+
+
+# graficar audios
+@app.route('/audio/graficar/<path:archivo>', methods=('GET','POST'))
+def graficar_audio(archivo=''):
+    try:
+        graficar.setear(ruta_imagen=ru_audmini)
+        r_aud = f'../{archivo}'
+        resp = graficar.generar(r_aud)
+        return jsonify({'error': False, 'rutas': resp})
+    except:
+        return jsonify({'error': True})

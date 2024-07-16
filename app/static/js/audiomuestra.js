@@ -1,9 +1,10 @@
 const AudioMuestra = AM = {
     ls: (cb=()=>{}) => {
-        PU.lista('/samples/', d => {
+        ajax_post('/samples/ls/', {ruta:''}, resp => {
+            let d = JSON.parse(resp);
             cb(d.filter(e => {
                 if(!e.endsWith('.md') && !e.endsWith('.py')) return true;
-                    }))
+            }))
         });
     },
     dat: (ca, cb=()=>{}) => {

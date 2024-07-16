@@ -6,6 +6,7 @@ carpeta:
   codigos: './codigos/basico/'
   samples: './samples/'
   synth: './synth/'
+  audmini:  './aud_miniaturas/'
 
 browser: 'chromium --app='
 
@@ -58,7 +59,6 @@ grabacion:
   ruta: '../samples/grabaciones/'
   json: '../samples/grabaciones/samples.json'
   formato: 'wav'
-  # mp3 , wav , m4a , flac
   sobreescribir: true
 
 cronometro:
@@ -80,3 +80,9 @@ samples:
   activos:
     - caalma-sample_ejemplo
     - grabaciones
+
+
+graficar:
+  titulo: Graficación de audio
+  activo: true
+  visible: 1

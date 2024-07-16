@@ -15,7 +15,6 @@ U.ayuda = (m='l', a='ayuda.txt') => { // mostrar ayuda
     }
 }
 
-
 U.sls = (sep = ' | ') => { // listar samples
     AM.ls(l => NT.reemplazar(l.join(sep)))
 }
@@ -40,6 +39,12 @@ U.sau = (n=0, id=undefined) => { // devuelve el audio específico
     });
 }
 
+U.gau = (n=0, id=undefined) => { // graficar un audio específico
+    if(id === undefined){ id = G._sban; }
+    AM.elem(id, G._sgrp, d => {
+        GF.generar(d.url(n).replace('/static', ''));
+    });
+}
 
 U.sDuplicados = (cb=v=>{}, out_json=true) => { // devuelve los samples colicion de nombres
     let ts = {},

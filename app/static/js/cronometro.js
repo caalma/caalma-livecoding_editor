@@ -6,7 +6,7 @@ const Cronometro = CR = {
                 <button class="detener" title="DETENER"></button>
                 <button class="limpiar" title="LIMPIAR"></button>
 
-                <input class="etiqueta" type="text" title="Etiqueta de registro">
+                <input class="etiqueta" type="text" placeholder="Nota" title="Etiqueta de registro">
                 <button class="registrar" title="REGISTRAR"></button>
                 <button class="copiar" title="COPIAR al portapapeles"></button>
             </div>

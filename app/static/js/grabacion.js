@@ -1,12 +1,21 @@
 const Grabacion = GR = {
     html: `<div>
-              <select class="entradas" title="Entrada de Audio"></select>
-              <input type="text" class="etiqueta" value="grA" title="Gruṕo/Etiqueta">
-              <input type="number" class="duracion" value="0" title="Duración">
+              <select class="entradas" title="Dispositivo de entrada de audio"></select>
+              <input type="text" class="etiqueta" value="grA" title="Gruṕo">
+              <div class="d-flex">
+                 <input type="number" class="duracion" value="0" title="Duración (segundos)">
+                 <select class="formato" title="Formato de archivo">
+                    <option value="wav">wav</option>
+                    <option value="flac">flac</option>
+                    <option value="m4a">m4a</option>
+                    <option value="mp3">mp3</option>
+                    <option value="ogg">ogg</option>
+                 </select>
+              </div>
             </div>
             <nav>
-              <button class="iniciar">GRABAR</button>
-              <button class="actualizar">Re-Listar</button>
+              <button class="iniciar" title="Comenzar a grabar el audio">GRABAR</button>
+              <button class="actualizar" title="Regenerar samples.json de las grabaciones">Re-Listar</button>
             </nav>
             <ul class="lista"></ul>`,
     cAct: 'activo',
@@ -17,6 +26,7 @@ const Grabacion = GR = {
     entr: undefined,
     etiq: undefined,
     dura: undefined,
+    frmt: undefined,
     list: undefined,
     activar: () => {
         GR.elem = document.getElementById('grabacion');
@@ -28,6 +38,7 @@ const Grabacion = GR = {
         GR.entr = GR.elem.querySelector('.entradas');
         GR.etiq = GR.elem.querySelector('.etiqueta');
         GR.dura = GR.elem.querySelector('.duracion');
+        GR.frmt = GR.elem.querySelector('.formato');
         GR.list = GR.elem.querySelector('.lista');
 
         GR.inic.addEventListener('click', GR.iniciar);
@@ -66,6 +77,7 @@ const Grabacion = GR = {
         let dat = {
             entrada: GR.entr.value,
             etiqueta: GR.etiq.value,
+            formato: GR.frmt.value,
             duracion: GR.dura.value
         };
         ajax_post('/grabar_audio/iniciar/', dat, resp => {
@@ -85,7 +97,7 @@ const Grabacion = GR = {
         });
     },
     agregar: (dat) => {
-        let html = `<b>${dat.idx}</b> : <span>${dat.nom}</span><button class="fin">FIN</button>`;
+        let html = `<b>${dat.idx}</b> : <span>${dat.nom}</span><button class="fin" title="Finalizar grabación">FIN</button>`;
         let el = document.createElement('li');
         el.innerHTML = html;
         GR.list.appendChild(el);
