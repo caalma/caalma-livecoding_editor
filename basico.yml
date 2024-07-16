@@ -76,13 +76,12 @@ webExterna:
   url: ''
   height: '300px'
 
-samples:
-  activos:
-    - caalma-sample_ejemplo
-    - grabaciones
-
-
 graficar:
   titulo: Graficación de audio
   activo: true
   visible: 1
+
+samples:
+  activos:
+    - caalma-sample_ejemplo
+    - grabaciones
