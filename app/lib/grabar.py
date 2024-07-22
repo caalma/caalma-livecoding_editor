@@ -43,7 +43,7 @@ def procesar_entradas(r):
 
 
 
-def iniciar(entrada='1', etiqueta= 'ne', duracion='0', formato='wav'):
+def iniciar(entrada='1', etiqueta= 'ne', duracion='0', formato='wav', canales='2'):
     duracion = float(duracion)
     inp = entradas[entrada]
     now = datetime.now()
@@ -57,7 +57,8 @@ def iniciar(entrada='1', etiqueta= 'ne', duracion='0', formato='wav'):
 
     idx = len(listdir(f'{rgAbs}{etiqueta}'))
     param_duracion = f'-t {duracion}' if duracion > 0 else ''
-    cmd = f'ffmpeg -v quiet -f pulse -i "{inp}" {param_duracion} {sg} -preset slower "{arc}"'
+    param_canales = f'-ac {canales}'
+    cmd = f'ffmpeg -v quiet -f pulse -i "{inp}" {param_duracion} {param_canales} {sg} -preset slower "{arc}"'
 
     pid = ejecutar_y_esperar(cmd)
 

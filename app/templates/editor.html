@@ -44,7 +44,8 @@
         <script src="/static/js/musicaconceptos.js"></script>
         <script src="/static/js/comun.js"></script>
         <script src="/static/js/utiles.js"></script>
-        <script src="/static/js/init.js"></script>
+        <script src="/static/js/init-editor.js"></script>
+
     </head>
     <body>
         <div class="areas">
@@ -96,8 +97,7 @@
                     {% endif %}
 
                 </ul>
-            </div
-            >
+            </div>
             <div class="areaUtiles visible" id="areaUtiles">
                 <button class="ajuste">#</button>
                 <script>
@@ -114,7 +114,9 @@
                                 <span>LCE: </span>
                                 <span title="Dimensiones de ventana">{<span id="dimensiones"></span>}</span>
                                 <span title="Modo Offline">{% if cfg.modo_offline %}{offline}{% else %}{online}{% endif %}</span>
-                                <button id="btnShutdown" title="Cerrar la aplicación y apagar el servidor.">Chau!</button>
+                                <br>
+                                <a class="btn link" href="{{ url_for('explorar_audio') }}" target="ExplorarAudio">x:Aud</a>
+                                <button class="btn link" id="btnShutdown" title="Cerrar la aplicación y apagar el servidor.">Chau!</button>
                             </div>
                             <div>
                                 <input id="codeComando" title="Área de ejecución de comandos" autocorrect="off" autocapitalize="off" spellcheck="false"
@@ -139,14 +141,14 @@
                         <div id="menuStrudel" class="menu">
                             <div>
                                 <span>STRUDEL: </span>
-                                <button id="btnEval" title="Evaluar e Iniciar">=</button>
-                                <button id="btnStart" title="Reproducir/Continuar">></button>
-                                <button id="btnPause" title="Pausar y Esperar">-</button>
-                                <button id="btnStop" title="Detener y Reiniciar">·</button>
+                                <button class="btn link" id="btnEval" title="Evaluar e Iniciar">=</button>
+                                <button class="btn link" id="btnStart" title="Reproducir/Continuar">></button>
+                                <button class="btn link" id="btnPause" title="Pausar y Esperar">-</button>
+                                <button class="btn link" id="btnStop" title="Detener y Reiniciar">·</button>
                                 <span>---</span>
-                                <button id="btnLineNumberToggle" title="Conmutar Visibilidad de Números de Línea">LN</button>
-                                <button id="btnWrapTextToggle" title="Conmutar Corte de línea de texto.">CT</button>
-                                <button id="btnAutoCommpleteToggle" title="Conmutar Ayuda y Autocompletado">AC</button>
+                                <button class="btn link" id="btnLineNumberToggle" title="Conmutar Visibilidad de Números de Línea">LN</button>
+                                <button class="btn link" id="btnWrapTextToggle" title="Conmutar Corte de línea de texto.">CT</button>
+                                <button class="btn link" id="btnAutoCommpleteToggle" title="Conmutar Ayuda y Autocompletado">AC</button>
                             </div>
                         </div>
                         <script>

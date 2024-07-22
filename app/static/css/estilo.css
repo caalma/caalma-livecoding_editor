@@ -1,5 +1,6 @@
 * {
     box-sizing: border-box;
+    font-family: "Fira Code", monospace;
 }
 
 html {
@@ -124,4 +125,47 @@ body {
 
 .areaUtiles .ajuste:hover {
     background: #444;
+}
+
+.btn {
+    margin: 2px;
+    padding: 2px 5px;
+    border: none;
+    cursor: pointer;
+    background: #333;
+    color: #ddd;
+
+    &.link {
+        text-decoration: none;
+        color: #bbb;
+        font-size: 0.9em;
+        background: #333;
+        &:hover{
+            color: #fff;
+            background: #282828;
+        }
+    }
+
+    &.sample {
+        text-decoration: none;
+        color: #bbb;
+        font-size: 0.9em;
+        background: #111;
+
+        &:hover{
+            color: #fff;
+            background: #232323;
+        }
+    }
+
+    &.oir, &.ver, &.editar {
+        text-decoration: none;
+        color: #bbb;
+        font-size: 0.9em;
+        background: #148;
+        padding: 1px 4px;
+        margin: 0 2px;
+        font-size: 0.8em;
+        font-weight: bold;
+    }
 }

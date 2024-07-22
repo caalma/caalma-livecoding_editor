@@ -13,20 +13,6 @@
     font-size: 0.8em;
 }
 
-.menu button {
-    background: #333;
-    border: none;
-    margin: 0;
-    padding: 2px 4px;
-    color: #ddd;
-    cursor: pointer;
-    font-size: 0.9em;
-}
-
-.menu button:hover {
-    background: #222;
-    color: #fff;
-}
 
 .menu * {
     font-family: 'Fira Code';

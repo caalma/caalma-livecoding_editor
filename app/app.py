@@ -2,8 +2,9 @@
 # -*- coding:utf-8 -*-
 
 import yaml
+import json
 from os import listdir
-from os.path import splitext
+from os.path import splitext, exists, realpath
 from flask import ( Flask, render_template, request,
                    url_for, redirect, jsonify, send_file)
 from subprocess import Popen, PIPE
@@ -39,6 +40,7 @@ app = Flask(__name__)
 app.debug = True
 app.config['TEMPLATES_AUTO_RELOAD'] = True
 
+app.jinja_env.globals.update(tojson = json.dumps)
 
 # enrutamientos
 
@@ -102,7 +104,8 @@ def grabar_audio_ini():
         etiqueta = request.form['etiqueta']
         duracion = request.form['duracion']
         formato = request.form['formato']
-        resp = grabar.iniciar(entrada, etiqueta, duracion, formato)
+        canales = request.form['canales']
+        resp = grabar.iniciar(entrada, etiqueta, duracion, formato, canales)
         return jsonify(resp)
     else:
         return jsonify({'error': True})
@@ -189,5 +192,33 @@ def graficar_audio(archivo=''):
         r_aud = f'../{archivo}'
         resp = graficar.generar(r_aud)
         return jsonify({'error': False, 'rutas': resp})
+    except:
+        return jsonify({'error': True})
+
+
+# explorar audioss
+@app.route('/audio/explorar/', methods=('GET','POST'))
+def explorar_audio():
+    iniciar_app(ar_cfg_actual)
+    ls = {}
+    ru = '../'+cfg['carpeta']['samples']
+    for ar in listdir(ru):
+        ar_json = f'{ru}/{ar}/samples.json'
+        if exists(ar_json):
+            with open(ar_json, 'r') as f:
+                ls[ar] = json.load(f)
+    return render_template('explorar_audio.html', cfg=cfg, **locals())
+
+
+# editar : audios, textos
+@app.route('/editar/audio/<path:archivo>', methods=('GET','POST'))
+def editar_audio(archivo=''):
+    try:
+        r_aud = realpath(f'../{archivo}')
+        editor = cfg['software_externo']['editor_de_audio']
+        p = Popen(editor.format(archivo=r_aud), shell=True, stdout=PIPE, stderr=PIPE)
+        # stdout = p.stdout.read();
+        resp = graficar.generar(r_aud)
+        return jsonify({'error': False, 'path': r_aud})
     except:
         return jsonify({'error': True})

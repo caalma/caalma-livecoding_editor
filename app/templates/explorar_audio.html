@@ -1,0 +1,78 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>{{ cfg.title }} - Exploración de audios</title>
+
+        <link rel="icon" href="/static/img/favicon.ico">
+
+        {% if not cfg.modo_offline %}
+        <link rel="stylesheet" href="/static/css/tipografia.css">
+        {% endif%}
+
+        <link rel="stylesheet" href="/static/css/estilo.css">
+        <link rel="stylesheet" href="/static/css/explorar_audio.css">
+
+        <script src="/static/js/audiomuestra.js"></script>
+        <script src="/static/js/comun.js"></script>
+        <script src="/static/js/utiles.js"></script>
+        <script src="/static/js/init-explorar_audio.js"></script>
+
+    </head>
+    <body class="explorar-audio">
+
+        <section class="areaLista">
+            <div class="filtrado">
+                <div>
+                    <input type="search" id="filtrarSamples" value="" placeholder="...">
+                </div>
+                <div class="herramientas">
+                    <label for="soloActivos">SOLO ACTIVOS</label><input id="soloActivos" type="checkbox">
+                    <button class="btn" id="desplegarGrupos">DESPLEGAR</button>
+                    <button class="btn" id="colapsarGrupos">COLAPSAR</button>
+                </div>
+            </div>
+            <div>
+                <ul class="lista-grupos" id="listaGrupos">
+                    {% for idgrp in ls %}
+                    <li class="item-grupo {% if idgrp in cfg.samples.activos %}samples-activos{% endif %}">
+                        <div class="titulo">{{ idgrp }}</div>
+                        <ul class="lista-samples">
+                            {% for idsam in (ls[idgrp].keys()) | sort %}
+                            {% if idsam != '_base' %}
+                            <li class="btn sample"
+                                data_grp="{{ idgrp }}"
+                                data_ids="{{ idsam }}"
+                                data_samples="{{ tojson(ls[idgrp][idsam]) }}"
+                                data_base="{{ ls[idgrp]['_base'] }}">
+                                <b>{{ idsam }}</b>
+                                <small>({{ ls[idgrp][idsam] | count }})</small>
+                            </li>
+                            {% endif %}
+                            {% endfor %}
+                        </ul>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </section>
+
+        <section class="areaUtilidades">
+            <div class="grp">
+                <div class="seleccion-actual">
+                    <div class="titulo"><small>SELECCIÓN ACTUAL: </small><b id="baSeleccionadoTitulo"></b></div>
+                    <ul id="baSeleccionadoItems" class="lista"></ul>
+                </div>
+            </div>
+            <div class="grp">
+                <link rel="stylesheet" href="/static/css/graficar.css">
+                <script src="/static/js/graficar.js"></script>
+                <div id="graficarAudio" title="{{ cfg.graficar.titulo }}"></div>
+                <script>
+                 Graficar.activar();
+                 Graficar.visible({{ cfg.graficar.visible }});
+                </script>
+            </div>
+        </section>
+    </body>
+</html>

@@ -7,13 +7,13 @@ const AudioMuestra = AM = {
             }))
         });
     },
-    dat: (ca, cb=()=>{}) => {
-        ajax_get(`/static/samples/${ca}/samples.json`, {}, resp => {
+    dat: (grp, cb=()=>{}) => {
+        ajax_get(`/static/samples/${grp}/samples.json`, {}, resp => {
             cb(JSON.parse(resp));
         });
     },
-    ids: (ca, cb=()=>{}) => {
-        AM.dat(ca, d=>{
+    ids: (grp, cb=()=>{}) => {
+        AM.dat(grp, d=>{
             let result = [];
             for(let k in d){
                 if(k != '_base'){
@@ -23,17 +23,17 @@ const AudioMuestra = AM = {
             cb(result);
         });
     },
-    elem: (k, ca, cb=()=>{}) => {
-        AM.dat(ca, d=>{
-            cb(new AudioElem(ca, k, d[k], d['_base']));
+    elem: (k, grp, cb=()=>{}) => {
+        AM.dat(grp, d=>{
+            cb(new AudioElem(grp, k, d[k], d['_base']));
         });
     },
-    bus: (b, ca, cb=()=>{}) => {
-        AM.dat(ca, d=>{
+    bus: (b, grp, cb=()=>{}) => {
+        AM.dat(grp, d=>{
             let result = [];
             for(let k in d){
                 if(k.includes(b)){
-                    result.push(new AudioElem(ca, k, d[k], d['_base']));
+                    result.push(new AudioElem(grp, k, d[k], d['_base']));
                 }
             }
             cb(result);

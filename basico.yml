@@ -8,15 +8,18 @@ carpeta:
   synth: './synth/'
   audmini:  './aud_miniaturas/'
 
-browser: 'chromium --app='
-
 server:
   host: '127.0.0.1'
   port: 8008
   live_port: 35729
   debug: false
 
-modo_offline: false
+software_externo:
+  browser: 'chromium --app='
+  editor_de_audio: 'audacity {archivo}'
+  editor_de_texto: 'eed {archivo}'
+
+modo_offline: true
 
 codeStrudel:
   titulo: Área para código Strudel

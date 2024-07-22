@@ -1,0 +1,145 @@
+body.explorar-audio {
+    color: #fff;
+    position: relative;
+}
+
+ul.lista-grupos {
+    margin: 0;
+    padding: 0 10px;
+
+    &.con-filtrado {
+        border-right: 2px solid #08f;
+
+        .lista-samples {
+            display: block!important;
+
+            .btn.sample {
+                display: none;
+
+            }
+            .coincide {
+                display: inline-block!important;
+            }
+
+        }
+
+        .sin-coincidencias {
+            display: none!important;
+        }
+    }
+
+    & > li {
+        list-style: none;
+        color: #bbb;
+
+        &.item-grupo {
+            border-top: 1px dashed #bbb;
+            padding: 10px 0;
+            margin: 5px 0;
+
+            .titulo {
+                cursor: pointer;
+
+                &:hover {
+                    color: #fff;
+                }
+            }
+            &.samples-activos {
+                color: #fff;
+                border-left: 5px solid #8f0;
+                padding-left: 5px;
+            }
+
+            .lista-samples {
+                padding: 10px;
+                margin: 0;
+                padding: 0;
+                padding-left: 9px;
+                display: none;
+
+                li {
+                    padding: 0;
+                    display: inline-block;
+                    margin: 3px 6px;
+                }
+            }
+
+            &.desplegado {
+                .lista-samples {
+                    display: block;
+                }
+            }
+        }
+    }
+
+    .oculto {
+        display: none;
+    }
+}
+
+.areaLista {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 50%;
+
+    .filtrado {
+        margin: 10px;
+        margin-bottom: 20px;
+        input[type=text],
+        input[type=search] {
+
+            display: block;
+            width: 100%;
+            font-size: 1.3em;
+        }
+
+        * {
+            vertical-align: middle;
+        }
+        label {
+            font-size: .8em;
+        }
+
+        .herramientas {
+            padding: 5px;
+            text-align: center;
+        }
+    }
+
+
+}
+
+.areaUtilidades {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 49%;
+    height: 100%;
+    background: #111;
+
+    .grp {
+        margin: 0;
+        padding: 4px 6px;
+        border: 2px solid #333;
+        border-left-width: 3px;
+        border-right-width: 3px;
+
+    }
+    .seleccion-actual {
+        ul {
+            margin: 0;
+            padding: 0;
+
+            li {
+                list-style: none;
+                display: inline-block;
+                padding: 5px 8px;
+                border: 1px solid #333;
+                margin: 2px;
+                border-radius: 6px;
+                cursor: default;
+            }
+        }
+    }
+}

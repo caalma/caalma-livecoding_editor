@@ -1,9 +1,15 @@
 const Grabacion = GR = {
     html: `<div>
               <select class="entradas" title="Dispositivo de entrada de audio"></select>
-              <input type="text" class="etiqueta" value="grA" title="Gruṕo">
               <div class="d-flex">
+                 <input type="text" class="etiqueta" value="grA" title="Gruṕo">
                  <input type="number" class="duracion" value="0" title="Duración (segundos)">
+              </div>
+              <div class="d-flex">
+                 <select class="canales" title="Canales de grabación">
+                    <option value="2">stereo</option>
+                    <option value="1">mono</option>
+                 </select>
                  <select class="formato" title="Formato de archivo">
                     <option value="wav">wav</option>
                     <option value="flac">flac</option>
@@ -19,15 +25,19 @@ const Grabacion = GR = {
             </nav>
             <ul class="lista"></ul>`,
     cAct: 'activo',
-    key: 'F5',
+    keyVisualizar: 'F5',
+    keyConmutarGrabacion: 'F8',
     elem: undefined,
     inic: undefined,
     actu: undefined,
     entr: undefined,
     etiq: undefined,
     dura: undefined,
+    cana: undefined,
     frmt: undefined,
     list: undefined,
+    grabando: false,
+    finGrabacion: undefined,
     activar: () => {
         GR.elem = document.getElementById('grabacion');
         if(! GR.elem) return true;
@@ -38,6 +48,7 @@ const Grabacion = GR = {
         GR.entr = GR.elem.querySelector('.entradas');
         GR.etiq = GR.elem.querySelector('.etiqueta');
         GR.dura = GR.elem.querySelector('.duracion');
+        GR.cana = GR.elem.querySelector('.canales');
         GR.frmt = GR.elem.querySelector('.formato');
         GR.list = GR.elem.querySelector('.lista');
 
@@ -60,9 +71,18 @@ const Grabacion = GR = {
     },
     eventos_de_teclado: () => {
         window.addEventListener('keydown', ev => {
-            if(ev.code == GR.key){
+            if(ev.code == GR.keyVisualizar){
                 GR.visible(!GR.elem.classList.contains(GR.cAct));
                 ev.preventDefault();
+            }
+            else if(ev.code == GR.keyConmutarGrabacion){
+                if(!GR.grabando){
+                    GR.iniciar();
+                }else{
+                    if(GR.finGrabacion){
+                        GR.finGrabacion.click();
+                    }
+                }
             }
         });
     },
@@ -78,6 +98,7 @@ const Grabacion = GR = {
             entrada: GR.entr.value,
             etiqueta: GR.etiq.value,
             formato: GR.frmt.value,
+            canales: GR.cana.value,
             duracion: GR.dura.value
         };
         ajax_post('/grabar_audio/iniciar/', dat, resp => {
@@ -108,11 +129,14 @@ const Grabacion = GR = {
                 el.remove();
                 GR.actualizar_lista();
             },dat.dur*1000);
+        }else{
+            btnFin.addEventListener('click', ()=>{
+                GR.finalizar(dat.pid);
+                el.remove();
+                GR.grabando = false;
+            });
+            GR.finGrabacion = btnFin;
         }
-
-        btnFin.addEventListener('click', ()=>{
-            GR.finalizar(dat.pid);
-            el.remove();
-        });
+        GR.grabando = true;
     }
 }

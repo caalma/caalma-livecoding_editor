@@ -26,14 +26,15 @@
   + Un bloque de código Javascript.
 + Cada bloque de código graba y lee desde archivos específicos almacenados dentro de la carpeta `./codigos/`.
 + El área de útiles incluye:
-  + Menú general
-  + Menú Strudel
-  + Controles de audio del sistema operativo
-  + Panel para grabaciones (que se incorporan como samples)
-  + Cronómetro
-  + Graficación de audios
-  + Panel para carga de web externa
+  + Menú general.
+  + Menú Strudel.
+  + Controles de audio del sistema operativo.
+  + Panel para grabaciones (que se incorporan como samples).
+  + Cronómetro.
+  + Graficación de audios. Con selección de dispositivos, duración, canales, organización.
+  + Panel para carga de web externa.
 + Para Strudel está disponible una versión offline. Dicha versión está modificada para que cargue los samples y los synth desde local. La versión offline es Strudel 1.1.0.
++ Página de exploración de audios.
 
 
 ## Pendiente

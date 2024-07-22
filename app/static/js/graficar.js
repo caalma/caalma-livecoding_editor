@@ -106,8 +106,8 @@ const Graficar = GF = {
     },
     generar: (ar) => {
         GF.elem.classList.remove('con-datos');
+        GF.arch.value = ar;
         ajax_get(`/audio/graficar/${ar}`, {}, resp => {
-            GF.arch.value = ar;
             GF.setear(JSON.parse(resp))
         });
     },

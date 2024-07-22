@@ -22,7 +22,8 @@ ctrl+f3 -> conmuta visibilidad de notas
 f4 -> conmuta cronometro
 f5 -> recarga la página
 
-f6 -> conmuta panel de grabación
+f6 -> conmuta panel de grabación de audio
+f8 -> conmuta el inicio y fin de la grabación de audio
 
 ctrl+r -> recarga la pagina
 
