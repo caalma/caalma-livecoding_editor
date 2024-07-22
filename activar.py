@@ -29,7 +29,7 @@ if __name__ == '__main__':
     l = cfg['server']['live_port']
     url = f'http://{h}:{p}'
 
-    pb = Popen(f'{cfg["browser"]}"{url}"',
+    pb = Popen(f'{cfg["software_externo"]["browser"]}"{url}"',
         shell=True, stdout=PIPE, stderr=PIPE)
 
     app.browser = pb
