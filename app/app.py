@@ -207,6 +207,7 @@ def explorar_audio():
         if exists(ar_json):
             with open(ar_json, 'r') as f:
                 ls[ar] = json.load(f)
+                ls[ar]['_bAbsoluta'] = realpath(ru)
     return render_template('explorar_audio.html', cfg=cfg, **locals())
 
 

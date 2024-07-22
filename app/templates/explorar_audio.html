@@ -39,12 +39,13 @@
                         <div class="titulo">{{ idgrp }}</div>
                         <ul class="lista-samples">
                             {% for idsam in (ls[idgrp].keys()) | sort %}
-                            {% if idsam != '_base' %}
+                            {% if not idsam in ['_base', '_bAbsoluta'] %}
                             <li class="btn sample"
                                 data_grp="{{ idgrp }}"
                                 data_ids="{{ idsam }}"
                                 data_samples="{{ tojson(ls[idgrp][idsam]) }}"
-                                data_base="{{ ls[idgrp]['_base'] }}">
+                                data_base="{{ ls[idgrp]['_base'] }}"
+                                data_babsoluta="{{ ls[idgrp]['_bAbsoluta'] }}" >
                                 <b>{{ idsam }}</b>
                                 <small>({{ ls[idgrp][idsam] | count }})</small>
                             </li>
@@ -61,6 +62,7 @@
             <div class="grp">
                 <div class="seleccion-actual">
                     <div class="titulo"><small>SELECCIÓN ACTUAL: </small><b id="baSeleccionadoTitulo"></b></div>
+                    <div id="baSeleccionadoInfo" class="bloque-info"></div>
                     <ul id="baSeleccionadoItems" class="lista"></ul>
                 </div>
             </div>

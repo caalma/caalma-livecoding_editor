@@ -28,21 +28,47 @@ const filtrar_samples_con = (tex) => {
     }
 };
 
-const seleccionar_banco_audios = (id_grp, ru_base, id_sam, dat) => {
+const seleccionar_banco_audios = (id_grp, ru_base, ru_babsoluta, id_sam, dat) => {
     window.baSeleccionadoTitulo.innerHTML = `${id_grp} --> ${id_sam}`;
     window.baSeleccionadoItems.innerHTML = '';
+    window.baSeleccionadoInfo.innerHTML = '';
     let cnt = 0;
     dat.forEach(path => {
         let elem = document.createElement('li');
         elem.attributes.data_base = ru_base;
+        elem.attributes.data_babsoluta = ru_babsoluta;
         elem.attributes.data_path = path;
         elem.attributes.data_num = cnt;
-        elem.innerHTML = `<b title="${ru_base}${path}">${cnt}</b>
+        elem.innerHTML = `<button class="btn info" title="${ru_base}${path}">${cnt}</button>
                           <button class="btn oir" title="Oir">O</button><button class="btn ver" title="Ver">V</button><button class="btn editar" title="Editar">E</button>
-                          `;
+                         `;
         window.baSeleccionadoItems.appendChild(elem);
         cnt += 1;
     });
+
+    window.baSeleccionadoItems.querySelectorAll('.btn.info').forEach(el => {
+        el.addEventListener('click', ev =>{
+            let cInf = 'informando',
+                datos = '',
+                prev = el.parentElement.parentElement.querySelector(`.${cInf}`);
+
+            if(!el.classList.contains(cInf)){
+                if(prev){
+                    prev.classList.remove(cInf);
+                }
+            }
+
+            el.classList.toggle(cInf);
+            if(el.classList.contains(cInf)){
+                let ela = el.parentElement.attributes,
+                    rutaServer = `${ela.data_base}${ela.data_path}`,
+                    rutaReal = `${ela.data_babsoluta}/${id_grp}/${ela.data_path}`;
+                datos = `<p>${rutaServer}</p><p class="separador"></p><p>${rutaReal}</p>`;
+            }
+            window.baSeleccionadoInfo.innerHTML = datos;
+        });
+    });
+
     window.baSeleccionadoItems.querySelectorAll('.btn.oir').forEach(el => {
         el.addEventListener('click', ev =>{
             let aud = new AudioElem(
@@ -56,17 +82,16 @@ const seleccionar_banco_audios = (id_grp, ru_base, id_sam, dat) => {
 
     window.baSeleccionadoItems.querySelectorAll('.btn.ver').forEach(el => {
         el.addEventListener('click', ev =>{
-            let ela = el.parentElement.attributes;
-            let ruta = `${ela.data_base}${ela.data_path}`;
-
+            let ela = el.parentElement.attributes,
+                ruta = `${ela.data_base}${ela.data_path}`;
             GF.generar(ruta.replace('/static/', '/'));
         });
     });
 
     window.baSeleccionadoItems.querySelectorAll('.btn.editar').forEach(el => {
         el.addEventListener('click', ev =>{
-            let ela = el.parentElement.attributes;
-            let ruta = `${ela.data_base}${ela.data_path}`;
+            let ela = el.parentElement.attributes,
+                ruta = `${ela.data_base}${ela.data_path}`;
             ruta = ruta.replace('/static/', '/');
             ajax_get(`/editar/audio/${ruta}`, {}, resp => {
                 resp = JSON.parse(resp);
@@ -146,6 +171,7 @@ window.addEventListener('load', e => {
             seleccionar_banco_audios(
                 el.attributes.data_grp.value,
                 el.attributes.data_base.value,
+                el.attributes.data_babsoluta.value,
                 el.attributes.data_ids.value,
                 JSON.parse(el.attributes.data_samples.value)
             );

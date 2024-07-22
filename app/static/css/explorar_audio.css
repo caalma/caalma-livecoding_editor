@@ -139,6 +139,35 @@ ul.lista-grupos {
                 margin: 2px;
                 border-radius: 6px;
                 cursor: default;
+
+                .btn.info {
+                    background: transparent;
+                    color: #fff;
+                    font-weight: bold;
+
+                    &.informando {
+                        color: #f80;
+                    }
+                }
+
+            }
+        }
+
+        .bloque-info {
+            display: block;
+            maring: 10px;
+            padding: 10px;
+            font-size: 0.9em;
+            color: #fa0;
+
+            &:empty {
+                display: none;
+            }
+            p {
+                display: block;
+            }
+            .separador {
+                border-bottom: 1px dashed #640;
             }
         }
     }
