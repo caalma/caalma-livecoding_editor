@@ -18,7 +18,7 @@ const CC = {
     lista: (ruta= '', cb_ok = ()=>{}) => {
         // --- lista los archivos de codigos disponibles
         ajax_post('/codigos/', {ruta: ruta}, resp => {
-            cb_ok(resp.trim().split('\n'));
+            cb_ok(JSON.parse(resp));
         });
     }
 }
@@ -63,4 +63,15 @@ const ajax_get = (url, data, cb_ok=(or)=>{}, cb_err=(or)=>{}) => {
             cb_err(xhr.response);
         }
     }
+}
+
+const shutdown_app = chau = () => {
+    let xhr = new XMLHttpRequest();
+    xhr.open('GET', '/fin', true);
+    xhr.send();
+    setTimeout(window.close, 500);
+};
+
+const informar_dimensiones = () => {
+    window.dimensiones.innerHTML = `${window.innerWidth}x${window.innerHeight}`;
 }

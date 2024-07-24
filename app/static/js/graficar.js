@@ -32,6 +32,8 @@ const Graficar = GF = {
     rfin: undefined,
     vfin: undefined,
     sele: undefined,
+    cfg: {},
+    visible: true,
     activar: () => {
         GF.elem = document.getElementById('graficarAudio');
         if(! GF.elem) return true;
@@ -46,7 +48,39 @@ const Graficar = GF = {
         GF.vfin = GF.elem.querySelector('.vfin');
         GF.sele = GF.elem.querySelector('.seleccion');
 
+        GF.visible = GF.cfg.visible;
 
+
+        GF.visibilizar(GF.visible);
+        GF.setear_eventos()
+    },
+    posini: (val, actualizar_deslizador=true) => {
+        let pos = val * GF.imag.width;
+        GF.sele.style.left = `${pos}px`;
+        GF.vini.innerHTML = val;
+        if(GF.rfin.value < val){
+            GF.posfin(val);
+            GF.rfin.value = val;
+        }
+        if(actualizar_deslizador){
+            GF.rini.value = val;
+        }
+    },
+
+    posfin: (val, actualizar_deslizador=true) => {
+        let pos = GF.imag.width - (val * GF.imag.width);
+        GF.sele.style.right = `${pos}px`;
+        GF.vfin.innerHTML = val;
+        if(GF.rini.value > val){
+            GF.posini(val);
+            GF.rini.value = val;
+        }
+        if(actualizar_deslizador){
+            GF.rfin.value = val;
+        }
+    },
+
+    setear_eventos: () => {
         GF.tipo.addEventListener('change', GF.mostrar_actual);
         GF.arch.addEventListener('keyup', ev => {
             if(ev.code == 'Enter'){
@@ -62,48 +96,23 @@ const Graficar = GF = {
                 GF.posfin(ev.target.value, false)
             });
         });
-        GF.visible();
-        GF.eventos_de_teclado()
-    },
-    posini: (val, actualizar_deslizador=true) => {
-        let pos = val * GF.imag.width;
-        GF.sele.style.left = `${pos}px`;
-        GF.vini.innerHTML = val;
-        if(GF.rfin.value < val){
-            GF.posfin(val);
-            GF.rfin.value = val;
-        }
-        if(actualizar_deslizador){
-            GF.rini.value = val;
-        }
-    },
-    posfin: (val, actualizar_deslizador=true) => {
-        let pos = GF.imag.width - (val * GF.imag.width);
-        GF.sele.style.right = `${pos}px`;
-        GF.vfin.innerHTML = val;
-        if(GF.rini.value > val){
-            GF.posini(val);
-            GF.rini.value = val;
-        }
-        if(actualizar_deslizador){
-            GF.rfin.value = val;
-        }
-    },
-    eventos_de_teclado: () => {
+
         window.addEventListener('keydown', ev => {
             if(ev.code == GF.key){
-                GF.visible(!GF.elem.classList.contains(GF.cAct));
+                GF.visibilizar(!GF.elem.classList.contains(GF.cAct));
                 ev.preventDefault();
             }
         });
     },
-    visible: (e=true) => {
+
+    visibilizar: (e=true) => {
         if(e){
             GF.elem.classList.add(GF.cAct);
         }else{
             GF.elem.classList.remove(GF.cAct);
         }
     },
+
     generar: (ar) => {
         GF.elem.classList.remove('con-datos');
         GF.arch.value = ar;
@@ -111,6 +120,7 @@ const Graficar = GF = {
             GF.setear(JSON.parse(resp))
         });
     },
+
     setear: (dat) => {
         if(dat.error){
             GF.elem.classList.remove('con-datos');
@@ -124,6 +134,7 @@ const Graficar = GF = {
             GF.posfin(1);
         }
     },
+
     mostrar_actual: () => {
         GF.imag.src = '/static/audmini/' + GF.tipo.value;
     }

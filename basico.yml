@@ -24,29 +24,32 @@ modo_offline: true
 codeStrudel:
   titulo: Área para código Strudel
   activo: true
-  visible: 1
+  priorizar_sesion: true
+  visible: true
+  menu_visible: true
   ruta: 'strudel/'
   archivo: 00.js
-  menu_visible: 1
   theme: 'materialDark'
   fontfamily: 'Fira Code'
 
 codeJs:
   titulo: Área para código Javascript
   activo: true
-  visible: 1
+  priorizar_sesion: true
+  visible: true
   ruta: 'extra/'
   archivo: 00.js
 
 codeNotas:
   titulo: Área para notas
   activo: true
-  visible: 1
+  priorizar_sesion: true
+  visible: true
   ruta: 'notas/'
   archivo: 00.txt
 
 LCEditor:
-  menu_visible: 1
+  menu_visible: true
   codeComando:
     inicial: 'U.fijar()'
     historial:
@@ -58,7 +61,7 @@ LCEditor:
 grabacion:
   titulo: Controles de grabado de audio
   activo: true
-  visible: 1
+  visible: true
   ruta: '../samples/grabaciones/'
   json: '../samples/grabaciones/samples.json'
   formato: 'wav'
@@ -67,7 +70,7 @@ grabacion:
 cronometro:
   titulo: Cronometro
   activo: true
-  visible: 1
+  visible: true
 
 controlAudio:
   titulo: Control de audio
@@ -76,13 +79,14 @@ controlAudio:
 webExterna:
   titulo: Visor de recurso web externo
   activo: false
+  visible: false
   url: ''
   height: '300px'
 
 graficar:
   titulo: Graficación de audio
   activo: true
-  visible: 1
+  visible: true
 
 samples:
   activos:

@@ -43,6 +43,14 @@ const Cronometro = CR = {
         CR.breg = CR.elem.querySelector('.registrar');
         CR.bcop = CR.elem.querySelector('.copiar');
 
+        CR.visible = CR.cfg.visible;
+
+        CR.mostrar();
+        CR.setear_eventos();
+        CR.visibilizar(CR.visible)
+    },
+    setear_eventos: () => {
+
         CR.bini.addEventListener('click', CR.iniciar);
         CR.bpau.addEventListener('click', CR.pausar);
         CR.bdet.addEventListener('click', CR.detener);
@@ -56,13 +64,9 @@ const Cronometro = CR = {
             }
         });
 
-        CR.mostrar();
-        CR.eventos_de_teclado();
-    },
-    eventos_de_teclado: () => {
         window.addEventListener('keydown', ev => {
             if(ev.code == CR.key){
-                CR.visible(!CR.elem.classList.contains(CR.cAct));
+                CR.visibilizar(!CR.elem.classList.contains(CR.cAct));
                 ev.preventDefault();
             }
         });
@@ -112,7 +116,7 @@ const Cronometro = CR = {
         CR.registro.innerHTML = '';
         CR.etiqueta.value = '';
     },
-    visible: (e=true) => {
+    visibilizar: (e=true) => {
         if(e){
             CR.elem.classList.add(CR.cAct);
         }else{

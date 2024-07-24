@@ -44,7 +44,6 @@
         <script src="/static/js/musicaconceptos.js"></script>
         <script src="/static/js/comun.js"></script>
         <script src="/static/js/utiles.js"></script>
-        <script src="/static/js/init-editor.js"></script>
 
     </head>
     <body>
@@ -56,20 +55,10 @@
                     <li>
                         <link rel="stylesheet" href="/static/css/codestrudel.css">
                         <script src="/static/js/codeStrudel.js"></script>
-                        <div id="containerStrudel">
-                            <div class="archivo">
-                                <input spellcheck="false" autocorrect="off" autocapitalize="off" translate="no" list="CS_ls_archivos">
-                                <datalist id="CS_ls_archivos">
-                                    <option value="aaaa.js"></option>
-                                    <option value="bbb.js"></option>
-                                </datalist>
-                            </div>
-                            <div id="codeStrudel" title="{{ cfg.codeStrudel.titulo }}"></div>
-                        </div>
+                        <div id="containerStrudel" title="{{ cfg.codeStrudel.titulo }}"></div>
                         <script>
-                         var codeStrudel_visible = {{ cfg.codeStrudel.visible }};
-                         CodeStrudel.activar();
-                         G._codeStrudel_archivo_inicial = '{{ cfg.codeStrudel.archivo }}';
+                         CodeStrudel.cfg = {{ tojson(cfg.codeStrudel) | safe }};
+                         window.addEventListener('load', ev => { CodeStrudel.activar() });
                         </script>
                     </li>
                     {% endif %}
@@ -80,10 +69,8 @@
                         <script src="/static/js/notas.js"></script>
                         <div id="codeNotas" title="{{ cfg.codeNotas.titulo }}"></div>
                         <script>
-                         Notas.activar();
-                         Notas.ruta = '{{ cfg.codeNotas.ruta }}';
-                         Notas.leer('{{ cfg.codeNotas.archivo }}');
-                         Notas.visible({{ cfg.codeNotas.visible }});
+                         Notas.cfg = {{ tojson(cfg.codeNotas) | safe }};
+                         window.addEventListener('load', ev => { Notas.activar() });
                         </script>
                     </li>
                     {% endif %}
@@ -94,10 +81,8 @@
                         <script src="/static/js/codejs.js"></script>
                         <div id="codeJs" title="{{ cfg.codeJs.titulo }}"></div>
                         <script>
-                         CodeJs.activar();
-                         CodeJs.ruta = '{{ cfg.codeJs.ruta }}';
-                         CodeJs.leer('{{ cfg.codeJs.archivo }}');
-                         CodeJs.visible({{ cfg.codeJs.visible }});
+                         CodeJs.cfg = {{ tojson(cfg.codeJs) | safe }};
+                         window.addEventListener('load', ev => { CodeJs.activar() });
                         </script>
                     </li>
                     {% endif %}
@@ -132,7 +117,6 @@
                                     <option value="{{ code }}"></option>
                                     {% endfor%}
                                 </datalist>
-
                             </div>
                             <script>
                              {% if cfg.LCEditor.menu_visible %}
@@ -143,26 +127,10 @@
                         </div>
                     </li>
 
-                    <li>
-                        <div id="menuStrudel" class="menu">
-                            <div>
-                                <span>STRUDEL: </span>
-                                <button class="btn link" id="btnEval" title="Evaluar e Iniciar">=</button>
-                                <button class="btn link" id="btnStart" title="Reproducir/Continuar">></button>
-                                <button class="btn link" id="btnPause" title="Pausar y Esperar">-</button>
-                                <button class="btn link" id="btnStop" title="Detener y Reiniciar">·</button>
-                                <span>---</span>
-                                <button class="btn link" id="btnLineNumberToggle" title="Conmutar Visibilidad de Números de Línea">LN</button>
-                                <button class="btn link" id="btnWrapTextToggle" title="Conmutar Corte de línea de texto.">CT</button>
-                                <button class="btn link" id="btnAutoCommpleteToggle" title="Conmutar Ayuda y Autocompletado">AC</button>
-                            </div>
-                        </div>
-                        <script>
-                         {% if cfg.codeStrudel.menu_visible %}
-                         menuStrudel.classList.add('activo');
-                         {% endif %}
-                        </script>
-                    </li>
+                    {% if cfg.codeStrudel.activo %}
+                    <li><div id="menuStrudel"></div></li>
+                    {% endif %}
+
 
                     {% if cfg.controlAudio.activo %}
                     <li>
@@ -170,7 +138,7 @@
                         <script src="/static/js/controlesaudio.js"></script>
                         <div id="controlesAudio" title="{{ cfg.controlAudio.titulo }}"></div>
                         <script>
-                         ControlesAudio.activar();
+                         window.addEventListener('load', ev => { ControlesAudio.activar() });
                         </script>
                     </li>
                     {% endif %}
@@ -181,8 +149,8 @@
                         <script src="/static/js/grabacion.js"></script>
                         <div id="grabacion" title="{{ cfg.grabacion.titulo }}"></div>
                         <script>
-                         Grabacion.activar();
-                         Grabacion.visible({{ cfg.grabacion.visible }});
+                         Grabacion.cfg = {{ tojson(cfg.grabacion) | safe }};
+                         window.addEventListener('load', ev => { Grabacion.activar() });
                         </script>
                     </li>
                     {% endif %}
@@ -193,8 +161,8 @@
                         <script src="/static/js/graficar.js"></script>
                         <div id="graficarAudio" title="{{ cfg.graficar.titulo }}"></div>
                         <script>
-                         Graficar.activar();
-                         Graficar.visible({{ cfg.graficar.visible }});
+                         Graficar.cfg = {{ tojson(cfg.graficar) | safe }};
+                         window.addEventListener('load', ev => { Graficar.activar() });
                         </script>
                     </li>
                     {% endif %}
@@ -205,8 +173,8 @@
                         <script src="/static/js/cronometro.js"></script>
                         <div id="cronometro" title="{{ cfg.cronometro.titulo }}"></div>
                         <script>
-                         Cronometro.activar();
-                         Cronometro.visible({{ cfg.cronometro.visible }});
+                         Cronometro.cfg = {{ tojson(cfg.cronometro) | safe }};
+                         window.addEventListener('load', ev => { Cronometro.activar() });
                         </script>
                     </li>
                     {% endif %}
@@ -214,14 +182,12 @@
                     {% if cfg.webExterna.activo %}
                     <li>
                         <link rel="stylesheet" href="/static/css/webexterna.css">
-                        <div id="webExterna" title="{{ cfg.webExterna.titulo }}">
-                            <input type="text" value="{{ cfg.webExterna.url }}">
-                            <iframe style="height:{{ cfg.webExterna.height }}" src="{{ cfg.webExterna.url }}"></iframe>
-                        </div>
+                        <script src="/static/js/webexterna.js"></script>
+
+                        <div id="webExterna" title="{{ cfg.webExterna.titulo }}"></div>
                         <script>
-                         window.webExterna.querySelector("input").addEventListener("change", ev => {
-                             window.webExterna.querySelector("iframe").src = ev.currentTarget.value;
-                         })
+                         WebExterna.cfg = {{ tojson(cfg.webExterna) | safe }};
+                         window.addEventListener('load', ev => { WebExterna.activar() });
                         </script>
                     </li>
                     {% endif %}
@@ -230,5 +196,8 @@
                 </ul>
             </div>
         </div>
+
+        <script src="/static/js/init-editor.js"></script>
+
     </body>
 </html>

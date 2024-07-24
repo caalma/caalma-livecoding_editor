@@ -23,11 +23,19 @@
 
 #codeNotas .archivo {
     margin: 0;
-    font-size: 0.8em;
-    color: rgba(255,255,255,.4);
-    text-align: right;
+
+    input {
+        width: 100%;
+        background: transparent;
+        color: rgba(255,255,255,.4);
+        font-size: 0.8em;
+        text-align: right;
+        border: none;
+    }
 }
 
 #codeNotas .archivo:focus {
-    color: rgba(255,255,255,.8);
+    input {
+        color: rgba(255,255,255,.8);
+    }
 }

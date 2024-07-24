@@ -38,6 +38,9 @@ const Grabacion = GR = {
     list: undefined,
     grabando: false,
     finGrabacion: undefined,
+    cfg: {},
+    visible: true,
+
     activar: () => {
         GR.elem = document.getElementById('grabacion');
         if(! GR.elem) return true;
@@ -52,13 +55,13 @@ const Grabacion = GR = {
         GR.frmt = GR.elem.querySelector('.formato');
         GR.list = GR.elem.querySelector('.lista');
 
-        GR.inic.addEventListener('click', GR.iniciar);
-        GR.actu.addEventListener('click', GR.actualizar_lista);
+        GR.visible = GR.cfg.visible;
 
         GR.entradas_disponibles();
-        GR.visible();
-        GR.eventos_de_teclado()
+        GR.visibilizar(GR.visible);
+        GR.setear_eventos()
     },
+
     entradas_disponibles: () => {
         ajax_post('/grabar_audio/entradas/', {}, resp => {
             resp = JSON.parse(resp);
@@ -69,10 +72,15 @@ const Grabacion = GR = {
             GR.entr.innerHTML = opt.join('');
         });
     },
-    eventos_de_teclado: () => {
+
+    setear_eventos: () => {
+
+        GR.inic.addEventListener('click', GR.iniciar);
+        GR.actu.addEventListener('click', GR.actualizar_lista);
+
         window.addEventListener('keydown', ev => {
             if(ev.code == GR.keyVisualizar){
-                GR.visible(!GR.elem.classList.contains(GR.cAct));
+                GR.visibilizar(!GR.elem.classList.contains(GR.cAct));
                 ev.preventDefault();
             }
             else if(ev.code == GR.keyConmutarGrabacion){
@@ -86,13 +94,15 @@ const Grabacion = GR = {
             }
         });
     },
-    visible: (e=true) => {
+
+    visibilizar: (e=true) => {
         if(e){
             GR.elem.classList.add(GR.cAct);
         }else{
             GR.elem.classList.remove(GR.cAct);
         }
     },
+
     iniciar: () => {
         let dat = {
             entrada: GR.entr.value,
@@ -106,17 +116,20 @@ const Grabacion = GR = {
             GR.agregar(JSON.parse(resp));
         });
     },
+
     finalizar: (pid) => {
         let dat  = {pid: pid};
         ajax_post('/grabar_audio/finalizar/', dat, resp => {
             console.log('Finalizada', JSON.parse(resp));
         });
     },
+
     actualizar_lista: () => {
         ajax_post('/grabar_audio/actualizar/', {}, resp => {
             console.log('Lista actualizada', JSON.parse(resp));
         });
     },
+
     agregar: (dat) => {
         let html = `<b>${dat.idx}</b> : <span>${dat.nom}</span><button class="fin" title="Finalizar grabación">FIN</button>`;
         let el = document.createElement('li');

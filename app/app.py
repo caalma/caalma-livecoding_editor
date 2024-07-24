@@ -62,9 +62,8 @@ def codigos_lista():
     lista = []
     if request.method == 'POST':
         subruta = request.form['ruta']
-        for ar in listdir(ru_codigos + subruta):
-            lista.append(splitext(ar)[0])
-        return '\n'.join(lista)
+        lista = listdir(ru_codigos + subruta)
+    return jsonify(lista)
 
 
 @app.route('/codigo/leer/', methods=('GET','POST'))
