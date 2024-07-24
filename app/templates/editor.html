@@ -57,7 +57,13 @@
                         <link rel="stylesheet" href="/static/css/codestrudel.css">
                         <script src="/static/js/codeStrudel.js"></script>
                         <div id="containerStrudel">
-                            <p class="archivo" contentEditable="true" spellcheck="false" autocorrect="off" autocapitalize="off" translate="no"></p>
+                            <div class="archivo">
+                                <input spellcheck="false" autocorrect="off" autocapitalize="off" translate="no" list="CS_ls_archivos">
+                                <datalist id="CS_ls_archivos">
+                                    <option value="aaaa.js"></option>
+                                    <option value="bbb.js"></option>
+                                </datalist>
+                            </div>
                             <div id="codeStrudel" title="{{ cfg.codeStrudel.titulo }}"></div>
                         </div>
                         <script>
