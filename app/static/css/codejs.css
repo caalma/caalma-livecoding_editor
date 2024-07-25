@@ -1,56 +1,45 @@
 #codeJs {
     background: #022310;
     display: none;
-}
 
-#codeJs.activo {
-    display: block;
-}
+    &.activo { display: block; }
 
-#codeJs.flash.bien {
-    background: #282;
-}
-
-#codeJs.flash.error {
-    background: #822;
-}
-
-#codeJs * {
-    font-family: 'Fira Code', monospace;
-}
-
-#codeJs .cnt {
-    border: none;
-    background: transparent;
-    width: 100%;
-    min-width: 100%;
-    max-width: 100%;
-    display: block;
-    padding: 10px;
-    color: #97bf3c;
-    font-size: 1em;
-    overflow-y: hidden;
-}
-
-#codeJs .cnt:focus {
-    outline: 1px dashed #cc8;
-}
-
-#codeJs .archivo {
-    margin: 0;
-
-    input {
-        width: 100%;
-        background: transparent;
-        color: rgba(255,255,255,.4);
-        font-size: 0.8em;
-        text-align: right;
-        border: none;
+    &.flash {
+        &.bien { background: #282; }
+        &.error { background: #822; }
     }
-}
 
-#codeJs .archivo:focus {
-    input {
-        color: rgba(255,255,255,.8);
+    * { font-family: 'Fira Code', monospace; }
+
+    .cnt {
+        border: none;
+        background: transparent;
+        width: 100%;
+        min-width: 100%;
+        max-width: 100%;
+        display: block;
+        padding: 10px;
+        color: #97bf3c;
+        font-size: 1em;
+        overflow-y: hidden;
+
+        &:focus { outline: 1px dashed #cc8; }
+    }
+
+    .archivo {
+        margin: 0;
+
+        input {
+            width: 100%;
+            background: transparent;
+            color: rgba(255,255,255,.4);
+            font-size: 0.8em;
+            text-align: right;
+            border: none;
+        }
+
+        &:focus {
+            input { color: rgba(255,255,255,.8); }
+        }
     }
 }

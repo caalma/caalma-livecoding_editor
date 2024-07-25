@@ -22,6 +22,7 @@
     <body class="explorar-audio">
 
         <section class="areaLista">
+
             <div class="filtrado">
                 <div>
                     <input type="search" id="filtrarSamples" value="" placeholder="...">
@@ -30,13 +31,18 @@
                     <label for="soloActivos">SOLO ACTIVOS</label><input id="soloActivos" type="checkbox">
                     <button class="btn" id="desplegarGrupos">DESPLEGAR</button>
                     <button class="btn" id="colapsarGrupos">COLAPSAR</button>
+                    <button class="btn" id="limpiarSesion">Limpiar SESIÓN</button>
                 </div>
             </div>
+
             <div>
                 <ul class="lista-grupos" id="listaGrupos">
                     {% for idgrp in ls %}
-                    <li class="item-grupo {% if idgrp in cfg.samples.activos %}samples-activos{% endif %}">
-                        <div class="titulo">{{ idgrp }}</div>
+                    <li id="sample--{{ idgrp }}" class="item-grupo {% if idgrp in cfg.samples.activos %}samples-activos{% endif %}">
+                        <div class="cab">
+                            <div class="titulo">{{ idgrp }}</div>
+                            <button class="btn regenerar" title="Regenerar JSON del banco de audios" data_idgrp="{{ idgrp }}">R</button>
+                        </div>
                         <ul class="lista-samples">
                             {% for idsam in (ls[idgrp].keys()) | sort %}
                             {% if not idsam in ['_base', '_bAbsoluta'] %}
@@ -56,9 +62,11 @@
                     {% endfor %}
                 </ul>
             </div>
+
         </section>
 
         <section class="areaUtilidades">
+
             <div class="grp">
                 <div class="seleccion-actual">
                     <div class="titulo"><small>SELECCIÓN ACTUAL: </small><b id="baSeleccionadoTitulo"></b></div>
@@ -66,15 +74,17 @@
                     <ul id="baSeleccionadoItems" class="lista"></ul>
                 </div>
             </div>
+
             <div class="grp">
                 <link rel="stylesheet" href="/static/css/graficar.css">
                 <script src="/static/js/graficar.js"></script>
                 <div id="graficarAudio" title="{{ cfg.graficar.titulo }}"></div>
                 <script>
-                 Graficar.activar();
-                 Graficar.visible({{ cfg.graficar.visible }});
+                 Graficar.cfg = {{ tojson(cfg.graficar) | safe }};
+                 window.addEventListener('load', ev => { Graficar.activar() });
                 </script>
             </div>
+
         </section>
     </body>
 </html>

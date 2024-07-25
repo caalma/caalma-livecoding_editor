@@ -37,11 +37,16 @@ ul.lista-grupos {
             padding: 10px 0;
             margin: 5px 0;
 
-            .titulo {
-                cursor: pointer;
+            .cab {
+                display: flex;
+                justify-content: space-between;
 
-                &:hover {
-                    color: #fff;
+                .titulo {
+                    cursor: pointer;
+
+                    &:hover {
+                        color: #fff;
+                    }
                 }
             }
             &.samples-activos {

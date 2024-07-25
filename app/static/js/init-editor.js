@@ -2,6 +2,8 @@ window.addEventListener('load', e => {
 
     window.btnShutdown.addEventListener('click', shutdown_app);
 
+    window.limpiarSesion.addEventListener('click', U.limpiar_sesion);
+
     window.codeComando.addEventListener('keydown', e => {
         let el = e.currentTarget,
             cB = 'bien',

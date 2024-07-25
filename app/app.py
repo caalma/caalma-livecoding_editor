@@ -8,8 +8,7 @@ from os.path import splitext, exists, realpath
 from flask import ( Flask, render_template, request,
                    url_for, redirect, jsonify, send_file)
 from subprocess import Popen, PIPE
-from .lib import grabar, graficar
-
+from .lib import grabar, graficar, audiodata
 
 # configuración
 
@@ -172,7 +171,7 @@ def static_audmini(archivo=''):
     else:
         return ''
 
-# listado de samples
+# samples
 @app.route('/samples/ls/', methods=('GET', 'POST'))
 def samples_listar():
     lista = []
@@ -183,9 +182,25 @@ def samples_listar():
         return jsonify(lista)
 
 
-# graficar audios
+@app.route('/samples/regenerar/', methods=('GET', 'POST'))
+def samples_regenerar():
+    if request.method == 'POST':
+        idgrp = request.form['idgrp']
+        ruta = f'../samples/{idgrp}/'
+        try:
+            cmd = f'../samples/samples-generar_json.py "{ruta}"'
+            p = Popen(cmd, shell=True, stdout=PIPE, stderr=PIPE)
+            return jsonify({'error': False, 'ruta': ruta})
+        except:
+            return jsonify({'error': True, 'ruta': ruta})
+    else:
+        return jsonify({'error': True})
+
+
+
+# audios
 @app.route('/audio/graficar/<path:archivo>', methods=('GET','POST'))
-def graficar_audio(archivo=''):
+def audio_graficar(archivo=''):
     try:
         graficar.setear(ruta_imagen=ru_audmini)
         r_aud = f'../{archivo}'
@@ -195,9 +210,8 @@ def graficar_audio(archivo=''):
         return jsonify({'error': True})
 
 
-# explorar audioss
 @app.route('/audio/explorar/', methods=('GET','POST'))
-def explorar_audio():
+def audio_explorar():
     iniciar_app(ar_cfg_actual)
     ls = {}
     ru = '../'+cfg['carpeta']['samples']
@@ -210,9 +224,8 @@ def explorar_audio():
     return render_template('explorar_audio.html', cfg=cfg, **locals())
 
 
-# editar : audios, textos
-@app.route('/editar/audio/<path:archivo>', methods=('GET','POST'))
-def editar_audio(archivo=''):
+@app.route('/audio/editar/<path:archivo>', methods=('GET','POST'))
+def audio_editar(archivo=''):
     try:
         r_aud = realpath(f'../{archivo}')
         editor = cfg['software_externo']['editor_de_audio']
@@ -220,5 +233,14 @@ def editar_audio(archivo=''):
         # stdout = p.stdout.read();
         resp = graficar.generar(r_aud)
         return jsonify({'error': False, 'path': r_aud})
+    except:
+        return jsonify({'error': True})
+
+
+@app.route('/audio/datos/<path:archivo>', methods=('GET','POST'))
+def audio_datos(archivo=''):
+    try:
+        r_aud = realpath(f'../{archivo}')
+        return jsonify({'error': False, 'datos': audiodata.get_data(r_aud)})
     except:
         return jsonify({'error': True})

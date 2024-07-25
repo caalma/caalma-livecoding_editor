@@ -11,6 +11,7 @@
         {% endif%}
 
         <link rel="stylesheet" href="/static/css/estilo.css">
+        <link rel="stylesheet" href="/static/css/editor.css">
         <link rel="stylesheet" href="/static/css/menu.css">
 
         {% if cfg.codeStrudel.activo %}
@@ -106,8 +107,9 @@
                                 <span title="Dimensiones de ventana">{<span id="dimensiones"></span>}</span>
                                 <span title="Modo Offline">{% if cfg.modo_offline %}{offline}{% else %}{online}{% endif %}</span>
                                 <br>
-                                <a class="btn link" href="{{ url_for('explorar_audio') }}" target="ExplorarAudio">x:Aud</a>
-                                <button class="btn link" id="btnShutdown" title="Cerrar la aplicación y apagar el servidor.">Chau!</button>
+                                <a class="btn link" href="{{ url_for('audio_explorar') }}" target="ExplorarAudio">x:Aud</a>
+                                <button class="btn link" id="limpiarSesion">0:Sesión</button>
+                                <button class="btn link" id="btnShutdown" title="Cerrar la aplicación y apagar el servidor.">a:Chau!</button>
                             </div>
                             <div>
                                 <input id="codeComando" title="Área de ejecución de comandos" autocorrect="off" autocapitalize="off" spellcheck="false"

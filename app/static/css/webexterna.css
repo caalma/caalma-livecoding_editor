@@ -3,30 +3,32 @@
     position: relative;
     background: #2e3235;
     width: 100%;
-}
 
-#webExterna iframe {
-    display: block;
-    width: 100%;
-    height: 300px;
-    border: none;
-}
+    iframe {
+        display: block;
+        width: 100%;
+        height: 300px;
+        border: none;
+    }
 
-#webExterna input {
-    display: block;
-    width: 100%;
-    border: none;
-    color: #3f3;
-    background: #131;
-    text-align: center;
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-indez: -1;
-    opacity: 0;
-}
+    input {
+        display: block;
+        width: 100%;
+        border: none;
+        color: #3f3;
+        background: #131;
+        text-align: center;
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-indez: -1;
+        opacity: 0;
+    }
 
-#webExterna:hover input {
-    z-index: 100;
-    opacity: 1;
+    &:hover {
+        input {
+            z-index: 100;
+            opacity: 1;
+        }
+    }
 }

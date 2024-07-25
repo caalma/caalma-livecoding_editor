@@ -7,6 +7,9 @@ U.recargar = () => { // recargar la página
     window.location.reload()
 }
 
+U.limpiar_sesion = () => { // Limpiar la sesión actual
+    sessionStorage.clear();
+}
 U.ayuda = (m='l', a='ayuda.txt') => { // mostrar ayuda
     if('g' == m){
         NT.grabar(a);

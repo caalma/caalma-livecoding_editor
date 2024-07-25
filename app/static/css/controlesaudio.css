@@ -1,12 +1,9 @@
 #controlesAudio {
     padding: 10px;
-}
 
+    label {
+        color: rgba(255,255,255, 0.5);
 
-#controlesAudio label {
-    color: rgba(255,255,255, 0.5);
-}
-
-#controlesAudio label input[type=range] {
-    width: 100%;
+        input[type=range] { width: 100%; }
+    }
 }

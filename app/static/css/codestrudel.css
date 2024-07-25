@@ -1,27 +1,26 @@
 
 #containerStrudel {
     background: #2e3235;
-}
 
-#containerStrudel .archivo {
-    margin: 0;
+    .archivo {
+        margin: 0;
 
-    input {
-        width: 100%;
-        background: transparent;
-        color: rgba(255,255,255,.4);
-        font-size: 0.8em;
-        text-align: right;
-        border: none;
+        input {
+            width: 100%;
+            background: transparent;
+            color: rgba(255,255,255,.4);
+            font-size: 0.8em;
+            text-align: right;
+            border: none;
+        }
+
+        &:focus {
+            input { color: rgba(255,255,255,.8); }
+        }
+
     }
-}
-
-#containerStrudel .archivo:focus {
-    input {
-        color: rgba(255,255,255,.8);
+    .codeStrudel div.cm-content.cm-lineWrapping:focus {
+        outline: 1px dashed #cc8;
     }
-}
 
-#containerStrudel #codeStrudel div.cm-content.cm-lineWrapping:focus {
-    outline: 1px dashed #cc8;
 }

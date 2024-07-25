@@ -20,15 +20,21 @@ const filtrar_samples_con = (tex) => {
             }
         });
         btnsGrupos.forEach(el => {
-            if(el.parentElement.querySelector('.'+cCoin) === null){
-                el.parentElement.classList.add(cSinC);
+            if(el.parentElement.parentElement.querySelector('.' + cCoin) === null){
+                el.parentElement.parentElement.classList.add(cSinC);
             }
         });
-
     }
 };
 
 const seleccionar_banco_audios = (id_grp, ru_base, ru_babsoluta, id_sam, dat) => {
+    sessionStorage.setItem(ksesion_bancoactual, JSON.stringify({
+        'id_grp':id_grp,
+        'ru_base': ru_base,
+        'ru_babsoluta': ru_babsoluta,
+        'id_sam': id_sam,
+        'dat': dat
+    }));
     window.baSeleccionadoTitulo.innerHTML = `${id_grp} --> ${id_sam}`;
     window.baSeleccionadoItems.innerHTML = '';
     window.baSeleccionadoInfo.innerHTML = '';
@@ -57,15 +63,28 @@ const seleccionar_banco_audios = (id_grp, ru_base, ru_babsoluta, id_sam, dat) =>
                     prev.classList.remove(cInf);
                 }
             }
-
             el.classList.toggle(cInf);
             if(el.classList.contains(cInf)){
                 let ela = el.parentElement.attributes,
                     rutaServer = `${ela.data_base}${ela.data_path}`,
-                    rutaReal = `${ela.data_babsoluta}/${id_grp}/${ela.data_path}`;
-                datos = `<p>${rutaServer}</p><p class="separador"></p><p>${rutaReal}</p>`;
+                    rutaReal = `${ela.data_babsoluta}/${id_grp}/${ela.data_path}`,
+                    ar = `${ela.data_base}${ela.data_path}`.replace('/static/','');
+
+                ajax_get(`/audio/datos/${ar}`, {}, r => {
+                    r = JSON.parse(r);
+                    datos = `<!--<p>${rutaServer}</p>-->
+                             <p class="separador"></p><small>${rutaReal}</small>
+                             <p class="separador"></p><small>
+                                <span>${r.datos.instante}</span> ---
+                                <span>${r.datos.segundos.toPrecision(2)} seg</span> ---
+                                <span>${r.datos.canales} canales</span> ---
+                                <span>${r.datos.muestreo} kHz</span>
+                             </small>`;
+                    window.baSeleccionadoInfo.innerHTML = datos;
+                });
+            }else{
+                window.baSeleccionadoInfo.innerHTML = datos;
             }
-            window.baSeleccionadoInfo.innerHTML = datos;
         });
     });
 
@@ -93,7 +112,7 @@ const seleccionar_banco_audios = (id_grp, ru_base, ru_babsoluta, id_sam, dat) =>
             let ela = el.parentElement.attributes,
                 ruta = `${ela.data_base}${ela.data_path}`;
             ruta = ruta.replace('/static/', '/');
-            ajax_get(`/editar/audio/${ruta}`, {}, resp => {
+            ajax_get(`/audio/editar/${ruta}`, {}, resp => {
                 resp = JSON.parse(resp);
                 console.log(resp)
                 if(!resp.error){
@@ -110,6 +129,9 @@ var btnsSamples = undefined;
 var btnsGruposActivos = undefined;
 var btnsGruposNoActivos = undefined;
 
+const ksesion_filtrado = 'EXSA-filtrado',
+      ksesion_soloactivos = 'EXSA-soloactivos',
+      ksesion_bancoactual = 'EXSA-bancoactual';
 
 window.addEventListener('load', e => {
     let cDesp = 'desplegado',
@@ -119,11 +141,11 @@ window.addEventListener('load', e => {
     btnsGrupos = document.querySelectorAll('.item-grupo .titulo');
 
     btnsGruposActivos = Array.prototype.filter.call(btnsGrupos, el => {
-        return el.parentElement.classList.contains(cSaAc);
+        return el.parentElement.parentElement.classList.contains(cSaAc);
     });
 
     btnsGruposNoActivos = Array.prototype.filter.call(btnsGrupos, el => {
-        return ! el.parentElement.classList.contains(cSaAc);
+        return ! el.parentElement.parentElement.classList.contains(cSaAc);
     });
 
     btnsSamples = document.querySelectorAll('.btn.sample');
@@ -131,39 +153,65 @@ window.addEventListener('load', e => {
 
     window.filtrarSamples.addEventListener('keyup', ev => {
         if(ev.code == 'Enter'){
-            filtrar_samples_con(ev.target.value);
+            let v = ev.target.value;
+            filtrar_samples_con(v);
+            sessionStorage.setItem(ksesion_filtrado, v);
         }
     });
 
     window.soloActivos.addEventListener('change', ev => {
         if(ev.target.checked){
             btnsGruposNoActivos.forEach(el => {
-                el.parentElement.classList.add(cOcul);
+                el.parentElement.parentElement.classList.add(cOcul);
             });
         }else{
             btnsGruposNoActivos.forEach(el => {
-                el.parentElement.classList.remove(cOcul);
+                el.parentElement.parentElement.classList.remove(cOcul);
             });
         }
+
+        sessionStorage.setItem(ksesion_soloactivos, ev.target.checked);
     });
 
     window.desplegarGrupos.addEventListener('click', ev =>{
         btnsGrupos.forEach(el => {
-            el.parentElement.classList.add(cDesp);
+            let it = el.parentElement.parentElement,
+                ksesion = `EXSA-collapse-${it.id}`;
+            it.classList.add(cDesp);
+            sessionStorage.setItem(ksesion, it.classList.contains(cDesp));
         });
     });
 
     window.colapsarGrupos.addEventListener('click', ev =>{
         btnsGrupos.forEach(el => {
-            el.parentElement.classList.remove(cDesp);
+            let it = el.parentElement.parentElement,
+                ksesion = `EXSA-collapse-${it.id}`;
+            it.classList.remove(cDesp);
+            sessionStorage.setItem(ksesion, it.classList.contains(cDesp));
         });
     });
 
+    window.limpiarSesion.addEventListener('click', ev => {
+        U.limpiar_sesion();
+
+    });
 
     btnsGrupos.forEach(el=>{
+        let it = el.parentElement.parentElement;
+        let ksesion = `EXSA-collapse-${it.id}`;
         el.addEventListener('click', ev => {
-            el.parentElement.classList.toggle(cDesp)
+            it.classList.toggle(cDesp);
+            sessionStorage.setItem(ksesion, it.classList.contains(cDesp));
         });
+        el.parentElement.querySelector('.btn.regenerar').addEventListener('click', ev => {
+            ajax_post('/samples/regenerar/', {'idgrp': ev.target.attributes.data_idgrp.value}, r => {
+                U.recargar();
+            });
+        });
+        if(eval(sessionStorage.getItem(ksesion))){
+            it.classList.add(cDesp);
+        }
+
     });
 
     btnsSamples.forEach(el => {
@@ -178,5 +226,27 @@ window.addEventListener('load', e => {
         });
     });
 
+    /* reactivar sesion */
+    let filtrado_value = sessionStorage.getItem(ksesion_filtrado);
+    if(filtrado_value){
+        window.filtrarSamples.value = filtrado_value;
+        filtrar_samples_con(window.filtrarSamples.value);
+    }
 
+    let soloactivos_value = sessionStorage.getItem(ksesion_soloactivos);
+    if(soloactivos_value){
+        window.soloActivos.click();
+    }
+
+    let bancoactual_value = sessionStorage.getItem(ksesion_bancoactual);
+    if(bancoactual_value){
+        let ba_d = JSON.parse(bancoactual_value);
+        seleccionar_banco_audios(
+            ba_d.id_grp,
+            ba_d.ru_base,
+            ba_d.ru_babsoluta,
+            ba_d.id_sam,
+            ba_d.dat
+        );
+    }
 });

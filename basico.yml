@@ -79,7 +79,7 @@ controlAudio:
 webExterna:
   titulo: Visor de recurso web externo
   activo: false
-  visible: false
+  visible: true
   url: ''
   height: '300px'
 

@@ -1,61 +1,68 @@
 #graficarAudio {
     display: none;
     padding: 10px;
-}
 
-#graficarAudio * {
-    font-family: 'Fira Code', monospace;
-}
+    &.activo { display: block; }
 
-#graficarAudio.activo {
-    display: block;
-}
-#graficarAudio input {
-    width: 100%;
-    display: inline-block;
-}
-#graficarAudio select {
-    width: 100%;
-    display: inline-block;
-}
+    * { font-family: 'Fira Code', monospace; }
 
-#graficarAudio .visor {
-    position: relative;
-}
+    input {
+        border: none;
+        background: #000;
+        color: #fff;
+        padding: 4px 6px;
+        width: 100%;
+        display: inline-block;
+    }
+    select {
+        border: none;
+        background: #333;
+        color: #fff;
+        padding: 4px 6px;
+        width: 100%;
+        display: inline-block;
+        margin: 3px 0;
+    }
 
-#graficarAudio .imagen {
-    margin: 3px 0;
-    width: 100%;
-    display: block;
-}
+    .visor {
+        position: relative;
+        display: block;
+        margin: 10px 0;
+        &:empty {
+            display: none;
+        }
 
-#graficarAudio .seleccion {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    _background: rgba(255,255,255,0.3);
-    outline: 2px dashed #ff0;
-}
-#graficarAudio .d-flex {
-    display: flex;
-    justify-content: center;
-}
+    }
 
-#graficarAudio .rango {
-    width: 80%;
-}
+    .imagen {
+        margin: 3px 0;
+        width: 100%;
+        display: block;
+    }
 
-#graficarAudio .valor {
-    width: 20%;
-    color: #ff0;
-}
+    .seleccion {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        outline: 2px dashed #ff0;
+    }
+    .d-flex {
+        display: flex;
+        justify-content: center;
+    }
 
-#graficarAudio .visible-con-datos {
-    display: none;
-}
+    .rango { width: 80%; }
 
-#graficarAudio.con-datos .visible-con-datos {
-    display: block;
+    .valor {
+        width: 20%;
+        color: #ff0;
+    }
+
+    .visible-con-datos { display: none; }
+
+    &.con-datos {
+        .visible-con-datos { display: block; }
+    }
 }

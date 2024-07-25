@@ -1,0 +1,94 @@
+.areas {
+    margin: 0;
+    padding: 0;
+    position: relative
+}
+
+/* area de codigo */
+.areaCode {
+    background: #222;
+    margin: 0;
+    padding: 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 70%;
+    height: 100vh;
+    overflow: auto;
+
+    &::-webkit-scrollbar { display: none; }
+
+    &.completo { width: 100%; }
+
+    & > ul {
+        margin: 0;
+        padding: 0;
+
+        & > li {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            border-style: solid;
+            border-color: rgba(255,255,255, 0.1);
+            border-width: 1px 3px;
+
+            &:first-child { border-top-width: 3px; }
+            &:last-child { border-bottom-width: 3px; }
+        }
+    }
+}
+
+
+/* area de utilidades */
+.areaUtiles {
+    background: #111;
+    margin: 0;
+    padding: 0;
+    position: fixed;
+    top: 0;
+    right: 0;
+    height: 100vh;
+    width: auto;
+
+    &::-webkit-scrollbar { display: none; }
+
+    &.visible {
+        width: 30%;
+        overflow: auto;
+
+        & > ul { display: block; }
+    }
+
+    & > ul {
+        display: none;
+        margin: 0;
+        padding: 0;
+        width: 100%;
+
+        & > li {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            border-style: solid;
+            border-color: rgba(255,255,255, 0.1);
+            border-width: 1px 3px;
+
+            &:first-child { border-top-width: 3px; }
+            &:last-child { border-bottom-width: 3px; }
+        }
+    }
+
+    .ajuste {
+        position: absolute;
+        bottom: 0;
+        right: none;
+        right: 0;
+        border: none;
+        padding: 5px 8px;
+        background: #333;
+        color: #888;
+        cursor:pointer;
+
+        &:hover { background: #444; }
+    }
+}

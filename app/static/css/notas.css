@@ -1,41 +1,35 @@
 #codeNotas {
     background: #1f1223;
     display: none;
-}
 
-#codeNotas.activo {
-    display: block;
-}
+    &.activo { display: block; }
 
-#codeNotas * {
-    font-family: 'Fira Code', monospace;
-}
+    * { font-family: 'Fira Code', monospace; }
 
-#codeNotas .cnt {
-    padding: 10px;
-    color: #78c2e7;
-}
+    .cnt {
+        padding: 10px;
+        color: #78c2e7;
 
-#codeNotas .cnt:focus {
-    border: none;
-    outline: 1px dashed #cc8;
-}
-
-#codeNotas .archivo {
-    margin: 0;
-
-    input {
-        width: 100%;
-        background: transparent;
-        color: rgba(255,255,255,.4);
-        font-size: 0.8em;
-        text-align: right;
-        border: none;
+        &:focus {
+            border: none;
+            outline: 1px dashed #cc8;
+        }
     }
-}
 
-#codeNotas .archivo:focus {
-    input {
-        color: rgba(255,255,255,.8);
+    .archivo {
+        margin: 0;
+
+        input {
+            width: 100%;
+            background: transparent;
+            color: rgba(255,255,255,.4);
+            font-size: 0.8em;
+            text-align: right;
+            border: none;
+        }
+
+        &:focus {
+            input { color: rgba(255,255,255,.8); }
+        }
     }
 }

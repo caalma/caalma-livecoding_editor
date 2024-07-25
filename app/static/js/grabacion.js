@@ -21,7 +21,7 @@ const Grabacion = GR = {
             </div>
             <nav>
               <button class="iniciar" title="Comenzar a grabar el audio">GRABAR</button>
-              <button class="actualizar" title="Regenerar samples.json de las grabaciones">Re-Listar</button>
+              <!--<button class="actualizar" title="Regenerar samples.json de las grabaciones">Re-Listar</button>-->
             </nav>
             <ul class="lista"></ul>`,
     cAct: 'activo',
@@ -131,25 +131,38 @@ const Grabacion = GR = {
     },
 
     agregar: (dat) => {
-        let html = `<b>${dat.idx}</b> : <span>${dat.nom}</span><button class="fin" title="Finalizar grabación">FIN</button>`;
+        let html = `<b>${dat.idx}</b> : <span>${dat.nom}</span>
+                    <button class="fin" title="Finalizar grabación">FIN</button>
+                    <button class="limpiar" title="Quitar referencia">X</button>`;
         let el = document.createElement('li');
         el.innerHTML = html;
         GR.list.appendChild(el);
-        let btnFin = el.querySelector('.fin');
+        let btnFin = el.querySelector('.fin'),
+            btnLimpiar = el.querySelector('.limpiar'),
+            cFinal = 'grabacion-finalizada';
+
         if(dat.autocorte){
             btnFin.remove();
             setTimeout(()=>{
-                el.remove();
+                el.classList.add(cFinal);
                 GR.actualizar_lista();
             },dat.dur*1000);
         }else{
             btnFin.addEventListener('click', ()=>{
                 GR.finalizar(dat.pid);
-                el.remove();
+                el.classList.add(cFinal);
+                btnFin.remove();
                 GR.grabando = false;
             });
             GR.finGrabacion = btnFin;
         }
+
+        btnLimpiar.addEventListener('click', ()=>{
+            if(el.classList.contains(cFinal)){
+                el.remove();
+            }
+        });
+
         GR.grabando = true;
     }
 }

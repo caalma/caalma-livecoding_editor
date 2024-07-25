@@ -10,7 +10,7 @@
 
 + Python 3
 + Python: Flask, Livereload, pyyaml
-+ Python: Numpy, Matplotlib (para graficación de audios)
++ Python: Numpy, Matplotlib, pydub, pyaudio (para graficación de audios)
 + Ffmpeg (para conversión de audios en graficación)
 + PulseAudio (para la utilidad de grabación)
 + GNU/Linux (para la utilidad de grabación)
