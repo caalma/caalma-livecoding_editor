@@ -109,6 +109,7 @@ const Notas = NT = {
     limpiar: () => {
         NT.reemplazar('');
     },
+
     visibilizar: (e=true) => {
         if(e){
             NT.elem.classList.add(NT.cAct);
