@@ -92,12 +92,6 @@
             </div>
             <div class="areaUtiles visible" id="areaUtiles">
                 <button class="ajuste">#</button>
-                <script>
-                 window.areaUtiles.querySelector('.ajuste').addEventListener('click', ()=>{
-                     window.areaUtiles.classList.toggle('visible');
-                     window.areaCode.classList.toggle('completo');
-                 });
-                </script>
                 <ul>
 
                     <li>
@@ -120,6 +114,16 @@
                                     {% endfor%}
                                 </datalist>
                             </div>
+                            <div>
+                                <input id="exploradorRecursos" title="Explorador de recursos" autocorrect="off" autocapitalize="off" spellcheck="false"
+                                       value="{{ cfg.LCEditor.exploradorRecursos.inicial }}" list="exploradorRecursos_historial">
+                                <datalist id="exploradorRecursos_historial">
+                                    {% for uri in cfg.LCEditor.exploradorRecursos.historial %}
+                                    <option value="{{ uri }}"></option>
+                                    {% endfor%}
+                                </datalist>
+                            </div>
+
                             <script>
                              {% if cfg.LCEditor.menu_visible %}
                              menuLCE.classList.add('activo');

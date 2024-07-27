@@ -1,6 +1,6 @@
 const ControlesAudio = CA = {
     html: `<label for="audioVolumen">
-              <small>VOLUMEN GENERAL DEL S.O.</small>
+              <small>VOLUMEN DEL S.O.</small>
               <input id="audioVolumen" min="0" max="100" type="range">
            </label>`,
     elem: undefined,

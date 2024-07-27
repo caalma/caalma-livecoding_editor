@@ -52,7 +52,7 @@ const CodeJs = CJ = {
 
     carga_inicial: () => {
         if(CJ.priorizar_sesion){
-            CJ.leer(sessionStorage.getItem(CJ.keySesionArchivo) || CJ.archivo_inicial);
+            CJ.leer(localStorage.getItem(CJ.keySesionArchivo) || CJ.archivo_inicial);
         }else{
             CJ.leer(NT.archivo_inicial);
         }
@@ -192,7 +192,7 @@ const CodeJs = CJ = {
 
     set_sesion: () => {
         if(CJ.priorizar_sesion){
-            sessionStorage.setItem(CJ.keySesionArchivo, CJ.arc_inp.value);
+            localStorage.setItem(CJ.keySesionArchivo, CJ.arc_inp.value);
         }
     }
 }

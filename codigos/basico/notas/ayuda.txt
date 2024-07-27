@@ -4,17 +4,17 @@
 
 ctrl+/ -> conmuta el comentado de bloque de codigo (en cod-strudel)
 
-
 ctrl+enter -> evalua todo el codigo (en cod-strudel y cod-js)
-
 
 shift+enter -> evalua el bloque actual. si no hay selección evalua la línea actual, sinó el texto seleccionado (en cod-js)
 
-
 alt+flechaArriba o alt+flechaAbajo -> desplaza verticalmente la línea actual (en cod-strudel).
 
-
 shift+alt+flechaArriba o shitf+alt+flechaAbajo -> duplica la línea actual (en cod-strudel).
+
+ctrl+x -> borrar línea actual (en cod-strudel)
+
+---
 
 esc -> foco en linea de comandos
 ctrl+esc -> conmuna visibilidad de menu general

@@ -21,7 +21,7 @@ const Grabacion = GR = {
             </div>
             <nav>
               <button class="iniciar" title="Comenzar a grabar el audio">GRABAR</button>
-              <!--<button class="actualizar" title="Regenerar samples.json de las grabaciones">Re-Listar</button>-->
+              <button class="actualizar oculto" title="Regenerar samples.json de las grabaciones">Re-Listar</button>
             </nav>
             <ul class="lista"></ul>`,
     cAct: 'activo',

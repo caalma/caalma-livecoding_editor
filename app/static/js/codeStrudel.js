@@ -93,7 +93,7 @@ const CodeStrudel = CS = {
 
     carga_inicial: () => {
         if(CS.priorizar_sesion){
-            CS.leer(sessionStorage.getItem(CS.keySesionArchivo) || CS.archivo_inicial);
+            CS.leer(localStorage.getItem(CS.keySesionArchivo) || CS.archivo_inicial);
         }else{
             CS.leer(CS.archivo_inicial);
         }
@@ -194,7 +194,7 @@ const CodeStrudel = CS = {
 
     set_sesion: () => {
         if(CS.priorizar_sesion){
-            sessionStorage.setItem(CS.keySesionArchivo, CS.arc_inp.value);
+            localStorage.setItem(CS.keySesionArchivo, CS.arc_inp.value);
         }
     }
 }

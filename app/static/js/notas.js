@@ -51,7 +51,7 @@ const Notas = NT = {
 
     carga_inicial: () => {
         if(NT.priorizar_sesion){
-            NT.leer(sessionStorage.getItem(NT.keySesionArchivo) || NT.archivo_inicial);
+            NT.leer(localStorage.getItem(NT.keySesionArchivo) || NT.archivo_inicial);
         }else{
             NT.leer(NT.archivo_inicial);
         }
@@ -143,7 +143,7 @@ const Notas = NT = {
     },
     set_sesion: () => {
         if(NT.priorizar_sesion){
-            sessionStorage.setItem(NT.keySesionArchivo, NT.arc_inp.value);
+            localStorage.setItem(NT.keySesionArchivo, NT.arc_inp.value);
         }
     }
 

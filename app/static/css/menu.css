@@ -2,21 +2,18 @@
     padding: 10px 16px 6px;
     text-align: center;
     display: none;
-}
 
-.menu.activo {
-    display: block;
-}
+    &.activo { display: block; }
 
-.menu span {
-    color: #777;
-    font-size: 0.8em;
-}
+    span {
+        color: #777;
+        font-size: 0.8em;
+    }
 
-
-.menu * {
-    font-family: 'Fira Code';
-    font-size: 1.1em;
+    * {
+        font-family: 'Fira Code';
+        font-size: 1.1em;
+    }
 }
 
 #codeComando {
@@ -28,20 +25,35 @@
     padding: 5px 6px;
     margin: 7px 5px 3px;
     border-radius: 6px;
-    font-size: 0.9em;
+    font-size: 0.7em;
     outline: none!important;
+
+    &:focus {
+        background: #222;
+        color: #fff;
+    }
+
+    &.bien { background: #6a0; }
+    &.error { background: #a10; }
 }
 
-#codeComando:focus {
-    background: #222;
-    color: #fff;
-}
+#exploradorRecursos {
+    background: transparent;
+    border: 1px solid #444;
+    width: calc(100% - 20px);
+    display: block;
+    color: #aaa;
+    padding: 5px 6px;
+    margin: 7px 5px 3px;
+    border-radius: 6px;
+    font-size: 0.7em;
+    outline: none!important;
 
+    &:focus {
+        background: #222;
+        color: #fff;
+    }
 
-#codeComando.bien {
-    background: #6a0;
-}
-
-#codeComando.error {
-    background: #a10;
+    &.bien { background: #6a0; }
+    &.error { background: #a10; }
 }

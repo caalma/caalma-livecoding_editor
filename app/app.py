@@ -244,3 +244,15 @@ def audio_datos(archivo=''):
         return jsonify({'error': False, 'datos': audiodata.get_data(r_aud)})
     except:
         return jsonify({'error': True})
+
+
+# abrir / explorar recurso
+@app.route('/recurso/explorar/', methods=('GET','POST'))
+def recurso_explorar():
+    if request.method == 'POST':
+        uri_value = request.form['uri']
+        cmd = cfg['software_externo']['explorador_recursos'].format(uri=uri_value)
+        Popen(cmd, shell=True)
+        return jsonify({'error': False})
+    else:
+        return jsonify({'error': True})

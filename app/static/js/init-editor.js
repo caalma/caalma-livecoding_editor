@@ -17,9 +17,24 @@ window.addEventListener('load', e => {
             }catch{
                 el.classList.add(cE);
             }
-
         }
     });
+
+    window.exploradorRecursos.addEventListener('keydown', e => {
+        let el = e.currentTarget,
+            cB = 'bien',
+            cE = 'error';
+        el.classList = [];
+        if(e.code === 'Enter'){
+            ajax_post('/recurso/explorar/', {'uri': el.value}, rOk => {
+                el.classList.add(cB);
+                setTimeout(() => { el.classList.remove(cB) }, 1000);
+            }, rEr => {
+                el.classList.add(cE);
+            });
+        }
+    });
+
 
     CS.setear_menu();
 
@@ -38,6 +53,17 @@ window.addEventListener('load', e => {
             ev.preventDefault();
         }
     });
+
+
+    const keySesionUtilesVisible = 'ED-utiles-visible';
+    window.areaUtiles.querySelector('.ajuste').addEventListener('click', ()=>{
+        window.areaUtiles.classList.toggle('visible');
+        window.areaCode.classList.toggle('completo');
+        localStorage.setItem(keySesionUtilesVisible, window.areaUtiles.classList.contains('visible'));
+    });
+    if(!JSON.parse(localStorage.getItem(keySesionUtilesVisible))){
+        window.areaUtiles.querySelector('.ajuste').click();
+    }
 
     informar_dimensiones();
 

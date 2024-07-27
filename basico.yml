@@ -18,6 +18,7 @@ software_externo:
   browser: 'chromium --app='
   editor_de_audio: 'audacity {archivo}'
   editor_de_texto: 'eed {archivo}'
+  explorador_recursos: 'xdg-open "{uri}"'
 
 modo_offline: true
 
@@ -57,6 +58,13 @@ LCEditor:
       - 'U.ayuda()'
       - 'NT.limpiar()'
       - 'U.sls()'
+  exploradorRecursos:
+    inicial: ''
+    historial:
+      - '../codigos/'
+      - '../samples/'
+      - '../app/'
+      - 'https://github.com/caalma/caalma-livecoding_editor'
 
 grabacion:
   titulo: Controles de grabado de audio
